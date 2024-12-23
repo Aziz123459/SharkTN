@@ -1,17 +1,10 @@
 import UserController from "../controllers/users.controller.js";
 import {Router} from "express"
 import{authenticate} from "../config/jwt.config.js"
-// inside of user.routes.js
-
-
-
-
-
+import StartupController from "../controllers/startup.controller.js";
+import InvestorController from "../controllers/investor.controller.js";
 
 const router = Router()
-
-router.post("/api/register", UserController.register);
-router.post("/api/login", UserController.login);
 
 // Authenticated route
 router.get("/api/users", authenticate, UserController.ReadAll);
@@ -22,11 +15,25 @@ router.route("/user")
     .post(UserController.create)
     .get(UserController.ReadAll)
 
-
 router.route("/user/:id")
     .get(UserController.ReadOne)
     .put(UserController.update)
     .delete(UserController.DeleteOne)
+
+router.route("/register")
+    .post(UserController.register)
+
+router.route("/register/startup")
+    .post (StartupController.create)
+
+router.route("/register/investor")
+    .post(InvestorController.create)
+
+router.route("/login")
+    .post(UserController.login)
+
+router.route("/logout")
+    .get(UserController.logout)
 
 export default router
 

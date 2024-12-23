@@ -1,5 +1,5 @@
-import { model,Schema } from "mongoose";
-
+import mongoose, { model,Schema } from "mongoose";
+import User from "./users.model.js"
 const StartUpSchema= new Schema(
     {
         StartupName:{
@@ -35,7 +35,10 @@ const StartUpSchema= new Schema(
             type:String,
             required:[true,"LinkedIn or Social Media Profile is required"]
         },
-
+        userType:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
 
     },
     {timestamps:true}

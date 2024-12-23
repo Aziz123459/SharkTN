@@ -1,4 +1,6 @@
 import UserSchema from '../models/users.model.js';
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken";
 
 const UserController = {
     create: async (req, res) => {
@@ -51,27 +53,44 @@ const UserController = {
         }
     },
     login: async(req, res) => {
-        const user = await UserSchema.findOne({ email: req.body.email });
-    
-        if(user === null) {
-            return res.sendStatus(400);
+        if (!req.body.email || !req.body.password) {
+            return res.status(400).json({ msg: "Email and password are required" });
         }
     
-        const correctPassword = await bcrypt.compare(req.body.password, user.password);
+        try {
+            const user = await UserSchema.findOne({ email: req.body.email });
     
-        if(!correctPassword) {
-            return res.sendStatus(400);
+            if (user === null) {
+                return res.status(400).json({ msg: "Email not found" });
+            }
+    console.log("****", user.password);
+    console.log("======", req.body.password);
+    
+            const correctPassword = await bcrypt.compare(req.body.password, user.password);
+    
+            console.log(correctPassword);
+            if (!correctPassword) {
+                
+                return res.status(400).json({ msg: "Incorrect password" });
+            }
+    
+            const userToken = jwt.sign(
+                { id: user._id },
+                process.env.SECRET_KEY,
+                { expiresIn: '24h' } 
+            );
+    
+            res
+                .cookie("usertoken", userToken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                })
+                .json({ msg: "success!", user: { firstName: user.firstName, lastName: user.lastName } });
+    
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ msg: "Server error", error: err.message });
         }
-    
-        const userToken = jwt.sign({
-            id: user._id
-        }, process.env.SECRET_KEY);
-    
-        res
-            .cookie("usertoken", userToken, secret, {
-                httpOnly: true
-            })
-            .json({ msg: "success!" });
     },
     register: (req, res) => {
         UserSchema  .create(req.body)
@@ -92,8 +111,6 @@ const UserController = {
         res.clearCookie('usertoken');
         res.sendStatus(200);
     }
-    
-    
 }
 
 export default UserController

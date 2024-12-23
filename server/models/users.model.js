@@ -1,4 +1,4 @@
-import { model,Schema } from "mongoose";
+import mongoose, { model,Schema } from "mongoose";
 import bcrypt from 'bcrypt';
 
 const UserSchema = new Schema({
@@ -42,35 +42,41 @@ const UserSchema = new Schema({
       type:String,
       required:[true,"Adress is required"]
     },
+    acctype:{
+      type:String,
+      validate:{
+          validator:(t) => ["investor","startup"].includes(t),
+          message:(props) => props.value+" is not a valid Account type"
+      }
+  },
   }, {timestamps: true});
 
-  UserSchema.virtual("confirmPassword")
-  .get(function () {
-    return this._confirmPassword;
-  })
-  .set(function (value) {
-    this._confirmPassword = value;
+  UserSchema.pre("validate", function (next) {
+    if (this.password !== this.confirmPassword) {
+      this.invalidate("confirmPassword", "Passwords must match.");
+    }
+    next();
   });
-
-// Validate that password matches confirmPassword
-UserSchema.pre("validate", function (next) {
-  if (this.password !== this.confirmPassword) {
-    this.invalidate("confirmPassword", "Passwords must match.");
-  }
-  next();
-});
-
-// Hash password before saving to the database
-UserSchema.pre("save", function (next) {
-  if (!this.isModified("password")) return next(); // Only hash if password is new or modified
-  bcrypt
-    .hash(this.password, 10)
-    .then((hash) => {
-      this.password = hash;
-      next();
+  
+  UserSchema.pre("save", function (next) {
+    if (!this.isModified("password")) return next();
+    bcrypt
+      .hash(this.password, 10)
+      .then((hash) => {
+        this.password = hash;
+        next();
+      })
+      .catch((err) => next(err));
+  });
+  UserSchema.virtual("confirmPassword")
+    .get(function () {
+      return this._confirmPassword;
     })
-    .catch((err) => next(err));
-});
+    .set(function (value) {
+      this._confirmPassword = value;
+    });
+  
+
   const User=model("User",UserSchema);
   export default User
   

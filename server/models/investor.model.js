@@ -1,4 +1,5 @@
-import { model,Schema } from "mongoose";
+import mongoose, { model,Schema } from "mongoose";
+import User from "./users.model.js"
 
 
 const investorSchema = new Schema({
@@ -30,6 +31,10 @@ const investorSchema = new Schema({
         maxlength: 500, 
         trim: true,
     },
+    userType:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref: User
+            }
 }, { timestamps: true }); 
 
 const Investor = model('Investor', investorSchema);
