@@ -1,7 +1,7 @@
 import { model,Schema } from "mongoose";
 
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     firstName: {
       type: String,
       required: [true, "First name is required"]
@@ -41,9 +41,31 @@ const UserSchema = new mongoose.Schema({
     Adress:{
       type:String,
       required:[true,"Adress is required"]
-    }
+    },
   }, {timestamps: true});
+
+  UserSchema.virtual('confirmPassword')
+  .get( () => this._confirmPassword )
+  .set( value => this._confirmPassword = value );
+
+  UserSchema.pre('validate', function(next) {
+    if (this.password !== this.confirmPassword) {
+      this.invalidate('confirmPassword', 'Password must match confirm password');
+    }
+    next();
+  });
   
+    // near the top is a good place to group our imports
+  const bcrypt = require('bcrypt');
+  // this should go after 
+  UserSchema.pre('save', function(next) {
+    bcrypt.hash(this.password, 10)
+      .then(hash => {
+        this.password = hash;
+        next();
+      });
+  });
+
   const User=model("User",UserSchema);
   export default User
   
