@@ -1,19 +1,22 @@
 import UserController from "../controllers/users.controller.js";
 import {Router} from "express"
-
+import{authenticate} from "../config/jwt.config.js"
 // inside of user.routes.js
-const Users = require('../controllers/users.controller.js');
-const { authenticate } = require('../config/jwt.config.js');
-module.exports = app => {
-  app.post("/api/register", Users.register);
-  app.post("/api/login", Users.login);
-  // this route now has to be authenticated
-  app.get("/api/users", authenticate, Users.getAll);
-}
+
+
+
 
 
 
 const router = Router()
+
+router.post("/api/register", UserController.register);
+router.post("/api/login", UserController.login);
+
+// Authenticated route
+router.get("/api/users", authenticate, UserController.ReadAll);
+
+
 
 router.route("/user")
     .post(UserController.create)
