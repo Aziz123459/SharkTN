@@ -44,26 +44,33 @@ const UserSchema = new Schema({
     },
   }, {timestamps: true});
 
-  UserSchema.virtual('confirmPassword')
-  .get( () => this._confirmPassword )
-  .set( value => this._confirmPassword = value );
-
-  UserSchema.pre('validate', function(next) {
-    if (this.password !== this.confirmPassword) {
-      this.invalidate('confirmPassword', 'Password must match confirm password');
-    }
-    next();
-  });
-  
-  // this should go after 
-  UserSchema.pre('save', function(next) {
-    bcrypt.hash(this.password, 10)
-      .then(hash => {
-        this.password = hash;
-        next();
-      });
+  UserSchema.virtual("confirmPassword")
+  .get(function () {
+    return this._confirmPassword;
+  })
+  .set(function (value) {
+    this._confirmPassword = value;
   });
 
+// Validate that password matches confirmPassword
+UserSchema.pre("validate", function (next) {
+  if (this.password !== this.confirmPassword) {
+    this.invalidate("confirmPassword", "Passwords must match.");
+  }
+  next();
+});
+
+// Hash password before saving to the database
+UserSchema.pre("save", function (next) {
+  if (!this.isModified("password")) return next(); // Only hash if password is new or modified
+  bcrypt
+    .hash(this.password, 10)
+    .then((hash) => {
+      this.password = hash;
+      next();
+    })
+    .catch((err) => next(err));
+});
   const User=model("User",UserSchema);
   export default User
   
