@@ -6,8 +6,12 @@ const StartUpSchema= new Schema(
             type:String,
             required:[true,"Startup name is required "],
         },
+        StartupLogo:{
+            type:String,
+            required:[true,"Startup logo is required "]
+        },
         BusinessRegistrationNumber:{
-            type:Number,
+            type:String,
             required:[true,"Business Registration Number is required "],
             validate: {
                 validator: v => /^[0-9]{7}[A-Za-z]$/.test(v),

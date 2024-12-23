@@ -106,6 +106,7 @@ const UserController = {
                     .json({ msg: "success!", user: user });
             })
             .catch(err => res.json(err));
+            res.status(400).json(err)
         },
     logout: (req, res) => {
         res.clearCookie('usertoken');
