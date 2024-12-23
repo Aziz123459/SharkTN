@@ -1,5 +1,5 @@
 import { model,Schema } from "mongoose";
-
+import bcrypt from 'bcrypt';
 
 const UserSchema = new Schema({
     firstName: {
@@ -55,8 +55,6 @@ const UserSchema = new Schema({
     next();
   });
   
-    // near the top is a good place to group our imports
-  const bcrypt = require('bcrypt');
   // this should go after 
   UserSchema.pre('save', function(next) {
     bcrypt.hash(this.password, 10)
