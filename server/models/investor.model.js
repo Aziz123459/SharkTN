@@ -3,16 +3,6 @@ import User from "./users.model.js"
 
 
 const investorSchema = new Schema({
-    fullName: {
-        type: String,
-        required: true,
-        minlength: 3,
-        trim: true,
-        validate: {
-        validator: value => /^[a-zA-Z\s]+$/.test(value), // Only alphabets and spaces
-        message: 'Full Name must only contain alphabets and spaces.',
-    },
-    },
     businessRegistrationNumber: {
         type: String,
         required: true,

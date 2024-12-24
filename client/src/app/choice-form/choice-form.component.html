@@ -1,0 +1,40 @@
+<!-- investor form -->
+<div *ngIf="type === 'investor'">
+    <h2>Investor Registration</h2>
+    <form (ngSubmit)="submitInvestor()">
+      <label for="businessRegistrationNumber">Business Registration Number:</label>
+      <input type="text" id="businessRegistrationNumber" [(ngModel)]="investorData.businessRegistrationNumber" name="businessRegistrationNumber" />
+  
+      <label for="investmentAmount">Investment Amount:</label>
+      <input type="text" id="investmentAmount" [(ngModel)]="investorData.investmentAmount" name="investmentAmount" />
+  
+      <label for="message">Message:</label>
+      <textarea id="message" [(ngModel)]="investorData.message" name="message"></textarea>
+  
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
+  <!-- startup form -->
+  <div *ngIf="type === 'startup'">
+    <h2>Startup Registration</h2>
+    <form (ngSubmit)="submitStartup()">
+      <label for="StartupName">Startup Name:</label>
+      <input type="text" id="StartupName" [(ngModel)]="startupData.StartupName" name="StartupName" />
+  
+      <label for="StartupLogo">Startup Logo:</label>
+      <input type="text" id="StartupLogo" [(ngModel)]="startupData.StartupLogo" name="StartupLogo" />
+  
+      <label for="BusinessRegistrationNumber">Business Registration Number:</label>
+      <input type="text" id="BusinessRegistrationNumber" [(ngModel)]="startupData.BusinessRegistrationNumber" name="BusinessRegistrationNumber" />
+  
+      <label for="Industry">Industry:</label>
+      <input type="text" id="Industry" [(ngModel)]="startupData.Industry" name="Industry" />
+  
+      <label for="BriefDescription">Brief Description:</label>
+      <textarea id="BriefDescription" [(ngModel)]="startupData.BriefDescription" name="BriefDescription"></textarea>
+  
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  

@@ -85,7 +85,7 @@ const UserController = {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                 })
-                .json({ msg: "success!", user: { firstName: user.firstName, lastName: user.lastName } });
+                .json({ msg: "success!", user: { id: user._id,firstName: user.firstName, lastName: user.lastName },token:userToken });
     
         } catch (err) {
             console.error(err);

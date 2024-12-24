@@ -1,0 +1,68 @@
+<div class="main">
+
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form (ngSubmit)="createUser()" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <label for="firstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" [(ngModel)]="new.firstName" name="firstName" id="firstName" placeholder="Your first Name"/>
+                            <p *ngIf="errorMessage.firstName" class="error">{{errorMessage.firstName.message}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="lastName" [(ngModel)]="new.lastName" id="lastName" placeholder="Your last Name"/>
+                            <p *ngIf="errorMessage.lastName" class="error">{{errorMessage.lastName.message}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" name="email" id="email" [(ngModel)]="new.email" placeholder="Your Email"/>
+                            <p *ngIf="errorMessage.email" class="error">{{errorMessage.email.message}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateOfBirth"><i class="zmdi zmdi-email"></i></label>
+                            <input type="date" name="dateOfBirth" id="dateOfBirth" [(ngModel)]="new.dateOfBirth" />
+                            <p *ngIf="errorMessage.dateOfBirth" class="error">{{errorMessage.dateOfBirth.message}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber"><i class="zmdi zmdi-email"></i></label>
+                            <input type="number" name="phoneNumber" id="phoneNumber" [(ngModel)]="new.phoneNumber" placeholder="Your Phone Number" />
+                            <p *ngIf="errorMessage.phoneNumber" class="error">{{errorMessage.phoneNumber.message}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="Adress"><i class="zmdi zmdi-email"></i></label>
+                            <input type="text" name="Adress" id="Adress" [(ngModel)]="new.Adress" placeholder="Your Adress"/>
+                            <p *ngIf="errorMessage.Adress" class="error">{{errorMessage.Adress.message}}</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" name="password" [(ngModel)]="new.password" id="pass" placeholder="Password"/>
+                            <p *ngIf="errorMessage.password" class="error">{{errorMessage.password.message}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input type="password" name="confirmPassword" [(ngModel)]="new.confirmPassword" id="re_pass" placeholder="confirm your password"/>
+                            <p *ngIf="errorMessage.confirmPassword" class="error">{{errorMessage.confirmPassword.message}}</p>
+                        </div>
+                        <div class="form-group">
+                            <select name="role" id="role" class="styled-select" [(ngModel)]="new.acctype">
+                                <option value="investor">Investor</option>
+                                <option value="startup">Startup Founder</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="assets\signin-image.jpg" alt="sing up image"></figure>
+                    <a routerLink="/login" class="signup-image-link">I am already member</a>
+                </div>
+            </div>
+        </div>
+    </section>

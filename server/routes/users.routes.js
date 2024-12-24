@@ -7,7 +7,7 @@ import InvestorController from "../controllers/investor.controller.js";
 const router = Router()
 
 // Authenticated route
-router.get("/api/users", authenticate, UserController.ReadAll);
+router.get("/api/users", UserController.ReadAll);
 
 
 
