@@ -3,15 +3,15 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 
 const UserController = {
-    create: async (req, res) => {
-        try {
-            const newUser = await UserSchema.create(req.body)
-            res.json(newUser)
-        } catch (err) {
-            console.log(err)
-            res.status(400).json(err)
-        }
-    },
+    // create: async (req, res) => {
+    //     try {
+    //         const newUser = await UserSchema.create(req.body)
+    //         res.json(newUser)
+    //     } catch (err) {
+    //         console.log(err)
+    //         res.status(400).json(err)
+    //     }
+    // },
     ReadAll: async (req, res) => {
         try {
             const AllUsers = await UserSchema.find()
@@ -93,21 +93,14 @@ const UserController = {
         }
     },
     register: (req, res) => {
-        UserSchema  .create(req.body)
-            .then(user => {
-                const userToken = jwt.sign({
-                    id: user._id
-                }, process.env.SECRET_KEY);
-        
-                res
-                    .cookie("usertoken", userToken, secret, {
-                        httpOnly: true
-                    })
-                    .json({ msg: "success!", user: user });
-            })
-            .catch(err => res.json(err));
-            res.status(400).json(err)
-        },
+        UserSchema.create(req.body)
+          .then(user => {const userToken = jwt.sign({id: user._id }, process.env.SECRET_KEY);
+
+              res.cookie("userToken", userToken).json({ msg: "success registration!", user: user });
+              console.log(userToken)
+          })
+          .catch(err => res.status(400).json(err));
+      },
     logout: (req, res) => {
         res.clearCookie('usertoken');
         res.sendStatus(200);

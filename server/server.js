@@ -14,7 +14,7 @@ const PORT = process.env.PORT;
 // -- MIDDLEWARE --
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors());
 
 // Routes
 app.use("/api", router);

@@ -12,7 +12,7 @@ router.get("/api/users", authenticate, UserController.ReadAll);
 
 
 router.route("/user")
-    .post(UserController.create)
+    // .post(UserController.create)
     .get(UserController.ReadAll)
 
 router.route("/user/:id")
