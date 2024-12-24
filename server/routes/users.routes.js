@@ -7,12 +7,12 @@ import InvestorController from "../controllers/investor.controller.js";
 const router = Router()
 
 // Authenticated route
-router.get("/api/users", authenticate, UserController.ReadAll);
+router.get("/api/users", UserController.ReadAll);
 
 
 
 router.route("/user")
-    .post(UserController.create)
+    // .post(UserController.create)
     .get(UserController.ReadAll)
 
 router.route("/user/:id")
