@@ -21,7 +21,7 @@ const investorSchema = new Schema({
         maxlength: 500, 
         trim: true,
     },
-    userType:{
+    userId:{
                 type:mongoose.Schema.Types.ObjectId,
                 ref: User
             }

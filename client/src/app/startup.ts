@@ -1,5 +1,5 @@
 export interface Startup {
-    StartupName?:string
+    startupName?:string
     StartupLogo?:string
     BusinessRegistrationNumber?:string
     Industry?:string
@@ -7,6 +7,8 @@ export interface Startup {
     UploadGovernmentIssuedID?:string
     UploadBusinessRegistrationCertificate?:string
     LinkedInorSocialMediaProfile?:string
+    teamNumber?:string
+    userId?:string
     createdAt?: string
     updatedAt?: string
 }

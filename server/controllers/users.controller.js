@@ -85,7 +85,7 @@ const UserController = {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                 })
-                .json({ msg: "success!", user: { id: user._id,firstName: user.firstName, lastName: user.lastName },token:userToken });
+                .json({ msg: "success!", user: user,token:userToken });
     
         } catch (err) {
             console.error(err);
@@ -96,7 +96,7 @@ const UserController = {
         UserSchema.create(req.body)
           .then(user => {const userToken = jwt.sign({id: user._id }, process.env.SECRET_KEY);
 
-              res.cookie("userToken", userToken).json({ msg: "success registration!", user: user });
+              res.cookie("userToken", userToken).json({ msg: "success registration!", user: user, token:userToken });
               console.log(userToken)
           })
           .catch(err => res.status(400).json(err));

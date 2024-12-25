@@ -6,6 +6,7 @@ import { Investor } from '../investor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ApiService } from '../api.service';
 
 
 
@@ -19,36 +20,49 @@ export class ChoiceFormComponent {
   type: 'investor' | 'startup' | null = null;
   investorData: Investor = {};
   startupData: Startup = {};
+  errorMessage: string | null = null;
+  userId: string | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService) {}
 
-  ngOnInit(): void {
-    this.type = this.route.snapshot.paramMap.get('type') as 'investor' | 'startup';
+ngOnInit(): void {
+  this.type = this.route.snapshot.paramMap.get('type') as 'investor' | 'startup';
+  this.userId= localStorage.getItem('userId');
+}
 
-    const navigation = this.router.getCurrentNavigation();
-    const stateData = navigation?.extras.state?.['userType'];
-
-    if (this.type === 'investor') {
-      this.investorData = stateData as Investor;
-    } else if (this.type === 'startup') {
-      this.startupData = stateData as Startup;
-    } else {
-      console.error('Invalid type');
-      this.router.navigate(['/error']); 
-    }
+submitInvestor(): void {
+  if (this.investorData) {
+    this.investorData.userId=this.userId
+    this.apiService.creatInvestor(this.investorData).subscribe({
+      next: (response) => {
+        console.log('Investor created successfully:', response);
+        this.router.navigate(['/home',this.type]);
+        
+      },
+      error: (err) => {
+        console.error('Error creating investor:', err);
+        this.errorMessage = 'Failed to create investor. Please try again.';
+      }
+    });
   }
+}
 
-  submitInvestor(): void {
-    if (this.investorData) {
-      console.log('Submitting investor data:', this.investorData);
+submitStartup(): void {
+  
+    if (this.startupData){
+      this.investorData.userId=this.userId
+      this.apiService.creatStartup(this.startupData).subscribe({
+        next: (response) => {
+          console.log('Startup created successfully:', response);
+          this.router.navigate(['/home',this.type]);
+        },
+        error: (err) => {
+          console.error('Error creating startup:', err);
+          this.errorMessage = 'Failed to create startup. Please try again.';
+        }
+      });
     }
-  }
-
-  submitStartup(): void {
-    if (this.startupData) {
-      console.log('Submitting startup data:', this.startupData);
-    }
-  }
+}
 
   selectedFileName: string | null = null;
 
