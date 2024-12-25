@@ -19,7 +19,9 @@ export class UserFormComponent {
   createUser(): void {
     this.apiService.createUser(this.new).subscribe({
       next: (res) => {
-        const userType = res.acctype || this.new.acctype; 
+        const userType = res.user.acctype ; 
+        localStorage.setItem("token", res.token)
+        localStorage.setItem("userId", res.user._id)
         this.router.navigate(['/register', userType], {
           state: { userType: res } 
         });

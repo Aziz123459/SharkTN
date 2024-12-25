@@ -2,7 +2,7 @@ import mongoose, { model,Schema } from "mongoose";
 import User from "./users.model.js"
 const StartUpSchema= new Schema(
     {
-        StartupName:{
+        startupName:{
             type:String,
             required:[true,"Startup name is required "],
         },
@@ -39,7 +39,11 @@ const StartUpSchema= new Schema(
             type:String,
             required:[true,"LinkedIn or Social Media Profile is required"]
         },
-        userType:{
+        teamNumber:{
+            type:String,
+            required:[true,"number of teamates is required"]
+        },
+        userId:{
             type:mongoose.Schema.Types.ObjectId,
             ref: "User"
         }

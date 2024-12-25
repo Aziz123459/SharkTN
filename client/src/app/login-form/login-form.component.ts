@@ -14,14 +14,24 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginFormComponent {
   new: User ={}
-    errorMessage: any = {}
+  errorMessage: any = {}
   
     constructor(private apiService: ApiService, private router: Router) {}
   
     login(): void {
       this.apiService.login(this.new).subscribe({
-        next: (res) => this.router.navigate(['/home']),
-        error: (err) => this.errorMessage = err
+        next: (res) => {
+          const userType = res.user.acctype 
+          localStorage.setItem("token", res.token)
+          localStorage.setItem("userId", res.user._id)
+          this.router.navigate(['/home',userType],{
+            state: { userType:userType } 
+          });
+        },
+        
+        error: (err) =>{this.errorMessage = err
+          console.error(err);
+        } 
       })
     }
   
