@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { Startup } from '../startup';
 import { Investor } from '../investor';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
 
 @Component({
   selector: 'app-choice-form',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule, MatCardModule, MatFormFieldModule],
   templateUrl: './choice-form.component.html',
   styleUrl: './choice-form.component.css'
 })
@@ -46,5 +50,15 @@ export class ChoiceFormComponent {
     }
   }
 
+  selectedFileName: string | null = null;
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFileName = input.files[0].name;
+    } else {
+      this.selectedFileName = null;
+    }
+  }
 
 }
