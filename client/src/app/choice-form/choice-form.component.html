@@ -47,7 +47,7 @@
 </div>
 
 <!-- Startup Form -->
-<div *ngIf="type === 'startup'" class="container mt-5">
+<div *ngIf="type === 'startup'" class="container mt-5 col-8 ">
   <div class="card shadow p-4">
     <h2 class="mb-4 text-success text-center">Startup Registration</h2>
     <form (ngSubmit)="submitStartup()">
@@ -61,18 +61,6 @@
           class="form-control"
           placeholder="Enter your startup name"
         />
-      </div>
-
-      <div class="mb-3">
-        <label for="StartupLogo" class="form-label">Startup Logo:</label>
-        <input
-          type="file"
-          id="StartupLogo"
-          name="StartupLogo"
-          class="form-control"
-          (change)="onFileSelected($event)"
-        />
-        <small class="form-text text-muted">{{ selectedFileName || 'No file selected' }}</small>
       </div>
 
       <div class="mb-3">
@@ -109,6 +97,57 @@
           rows="4"
           placeholder="Enter a brief description of your startup"
         ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="StartupLogo" class="form-label">Startup Logo:</label>
+        <input
+          type="file"
+          id="StartupLogo"
+          name="StartupLogo"
+          class="form-control"
+          (change)="onFileSelected($event)"
+          [(ngModel)]="startupData.StartupLogo"
+        />
+        <small class="form-text text-muted">{{ selectedFileName || 'No file selected' }}</small>
+      </div>
+
+      <div class="mb-3">
+        <label for="UploadGovernmentIssuedID" class="form-label">Government Issued ID:</label>
+        <input
+          type="file"
+          id="UploadGovernmentIssuedID"
+          name="UploadGovernmentIssuedID"
+          class="form-control"
+          (change)="onFileSelected($event)"
+          [(ngModel)]="startupData.UploadGovernmentIssuedID"
+        />
+        <small class="form-text text-muted">{{ selectedFileName || 'No file selected' }}</small>
+      </div>
+
+      <div class="mb-3">
+        <label for="UploadBusinessRegistrationCertificate" class="form-label">Business Registration Certificate:</label>
+        <input
+          type="file"
+          id="UploadBusinessRegistrationCertificate"
+          name="UploadBusinessRegistrationCertificate"
+          class="form-control"
+          (change)="onFileSelected($event)"
+          [(ngModel)]="startupData.UploadBusinessRegistrationCertificate"
+        />
+        <small class="form-text text-muted">{{ selectedFileName || 'No file selected' }}</small>
+      </div>
+
+      <div class="mb-3">
+        <label for="LinkedInorSocialMediaProfile" class="form-label">Linkdin Profile:</label>
+        <input
+          type="text"
+          id="LinkedInorSocialMediaProfile"
+          [(ngModel)]="startupData.LinkedInorSocialMediaProfile"
+          name="LinkedInorSocialMediaProfile"
+          class="form-control"
+          placeholder="Enter your LinkedInorSocialMediaProfile"
+        />
       </div>
 
       <div class="d-grid">
