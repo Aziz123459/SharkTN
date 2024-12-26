@@ -50,7 +50,7 @@ submitInvestor(): void {
 submitStartup(): void {
   
     if (this.startupData){
-      this.investorData.userId=this.userId
+      this.startupData.userId=this.userId
       this.apiService.creatStartup(this.startupData).subscribe({
         next: (response) => {
           console.log('Startup created successfully:', response);

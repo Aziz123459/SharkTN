@@ -20,6 +20,11 @@ router.route("/user/:id")
     .put(UserController.update)
     .delete(UserController.DeleteOne)
 
+router.route("/profile/:id")
+    .get(UserController.ReadOne)
+    .put(UserController.update)
+    .delete(UserController.DeleteOne)
+
 router.route("/startup")
     .get(StartupController.ReadAll)
 
@@ -27,6 +32,9 @@ router.route("/startup/:id")
     .get(StartupController.ReadOne)
     .put(StartupController.update)
     .delete(StartupController.DeleteOne)
+
+    router.route("/startup/user/:id")
+    .get(StartupController.FindStartupByUserId)
 
 router.route("/investor")
     .get(InvestorController.ReadAll)

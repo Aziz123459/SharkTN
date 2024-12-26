@@ -24,6 +24,15 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/user`)
   }
 
+  getuser(_id: string | undefined): Observable<any>{
+    return this.http.get(`${this.baseUrl}/profile/${_id}`)
+  }
+
+  getstartupByUserId(_id:String | undefined |null): Observable<any>{
+    return this.http.get(`${this.baseUrl}/startup/user/${_id}`).pipe(
+      catchError(this.handleError)
+  )
+  }
   createUser(data:User): Observable<any>{
     return this.http.post(`${this.baseUrl}/register`,data).pipe(  
       catchError(this.handleError)

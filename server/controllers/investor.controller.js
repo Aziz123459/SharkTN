@@ -49,6 +49,15 @@ const InvestorController = {
             console.log(err)
             res.status(400).json(err)
         }
+    },
+    FindInverstorByUserId: async (req, res) => {
+        const userId = mongoose.Types.ObjectId(req.params.userId);
+        try {
+            const investor = await investorSchema.find({ userId: userId }).exec();
+            return res.json(investor)
+        } catch (error) {
+            console.error('Error fetching investor:', error);
+        }    
     }
 }
 
