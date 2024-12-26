@@ -2,14 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiService } from '../api.service';
 import { Investor } from '../investor';
 import { Startup } from '../startup';
+import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, MatCardModule, MatFormFieldModule],
+  imports: [CommonModule, MatCardModule, MatFormFieldModule,HomeNavbarComponent,RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

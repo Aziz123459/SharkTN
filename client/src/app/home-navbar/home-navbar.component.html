@@ -1,3 +1,4 @@
+
 <mat-toolbar class="navbar">
     <div class="container">
     <div class="logo">
@@ -5,9 +6,9 @@
       </div>
     
       <nav class="nav-links">
-        <a mat-button routerLink="/home">Home</a>
+        <a mat-button routerLink="/home/{{type}}">Home</a>
         <a mat-button routerLink="/favourites" >Favourites</a>
-        <a mat-button routerLink="/profile" >Profile</a>
+        <a mat-button routerLink="/profile/{{id}}" >Profile</a>
         <button mat-button class="auth-button" routerLink="/logout">Logout</button>
       </nav>
     </div>
