@@ -1,16 +1,33 @@
-<div *ngIf="type === 'investor'" class="container mt-5">
-    <h1 class="text-primary text-center">Welcome, Investor!</h1>
-    <p class="text-center">
-      This is the investor's home page. Here you can manage your investments, view opportunities, and more.
-    </p>
-    
-  </div>
-  
-  <div *ngIf="type === 'startup'" class="container mt-5">
-    <h1 class="text-success text-center">Welcome, Startup!</h1>
-    <p class="text-center">
-      This is the startup's home page. Here you can showcase your business, find investors, and more.
-    </p>
+<div class="container">
+  <h1 *ngIf="type === 'startup'">Investors</h1>
+  <h1 *ngIf="type === 'investor'">Startups</h1>
+
+  <div *ngIf="item.length > 0; else noData" class="row">
+    <div *ngFor="let entry of item" class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          
+          <ng-container *ngIf="isInvestor(entry)">
+            <h5 class="card-title">Investor Details</h5>
+            <p><strong>Business Registration Number:</strong> {{ entry.businessRegistrationNumber }}</p>
+            <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }}</p>
+            <p><strong>Message:</strong> {{ entry.message }}</p>
+          </ng-container>
+
+          
+          <ng-container *ngIf="isStartup(entry)">
+            <h5 class="card-title">Startup Details</h5>
+            <p><strong>Name:</strong> {{ entry.startupName }}</p>
+            <p><strong>Industry:</strong> {{ entry.Industry }}</p>
+            <p><strong>Description:</strong> {{ entry.BriefDescription }}</p>
+            <p><strong>Team Number:</strong> {{ entry.teamNumber }}</p>
+          </ng-container>
+        </div>
+      </div>
+    </div>
   </div>
 
-  
+  <ng-template #noData>
+    <p>No data available.</p>
+  </ng-template>
+</div>

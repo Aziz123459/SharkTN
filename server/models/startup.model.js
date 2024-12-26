@@ -40,12 +40,12 @@ const StartUpSchema= new Schema(
             required:[true,"LinkedIn or Social Media Profile is required"]
         },
         teamNumber:{
-            type:String,
+            type:Number,
             required:[true,"number of teamates is required"]
         },
         userId:{
             type:mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            ref: User
         }
 
     },

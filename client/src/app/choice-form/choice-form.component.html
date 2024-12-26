@@ -63,13 +63,15 @@
         />
       </div>
       <div class="mb-3">
-        <label for="StartupName" class="form-label">Startup Name:</label>
-        <select [(ngModel)]="startupData.teamNumber">
-          <option value="2 to 4">2 to 4</option>
-          <option value="4 to 6">4 to 6</option>
-          <option value="6 to 10">6 to 10</option>
-          <option value="more">more</option>
-        </select>
+        <label for="teamNumber" class="form-label">teamates:</label>
+        <input
+          type="number"
+          id="teamNumber"
+          [(ngModel)]="startupData.teamNumber"
+          name="teamNumber"
+          class="form-control"
+          placeholder="teamNumber"
+        />
       </div>
 
       <div class="mb-3">

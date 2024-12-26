@@ -7,8 +7,8 @@ export interface Startup {
     UploadGovernmentIssuedID?:string
     UploadBusinessRegistrationCertificate?:string
     LinkedInorSocialMediaProfile?:string
-    teamNumber?:string
-    userId?:string
+    teamNumber?:Number
+    userId?:string | null
     createdAt?: string
     updatedAt?: string
 }
