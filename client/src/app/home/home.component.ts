@@ -16,7 +16,8 @@ import { Startup } from '../startup';
 export class HomeComponent {
   type: 'investor' | 'startup' | null = null; 
   item: (Investor | Startup)[] = []; 
-
+  investorData: Investor = {};
+  startupData: Startup = {};
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,10 +47,31 @@ export class HomeComponent {
         error: (err) => console.error('Error fetching startups:', err),
         complete: () => console.info('Fetched all startups')
       });
-    } else {
-      console.warn('Invalid type. Unable to fetch data.');
+    } 
+  }
+  getone(): void {
+    if (this.type === 'startup') {
+      this.apiService.getinvestor(this.investorData._id).subscribe({
+        next: (investorData: Investor) => (this.investorData = investorData),
+        error: (err) => console.error('Error fetching investor:', err),
+        complete: () => console.info('Fetched investor details')
+      });
+    } else if (this.type === 'investor') {
+      this.apiService.getstartup(this.startupData._id).subscribe({
+        next: (startupData: Startup) => (this.startupData = startupData),
+        error: (err) => console.error('Error fetching startup:', err),
+        complete: () => console.info('Fetched startup details')
+      });
     }
   }
+  
+  onPostClick(id: string | undefined): void {
+    this.router.navigate(['/display', this.type, id]);
+  }
+  
+  
+
+  
 
   
   isInvestor(entry: any): entry is Investor {

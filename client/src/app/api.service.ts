@@ -16,6 +16,18 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/startup`)
   }
 
+  getstartup(_id:String | undefined |null): Observable<any>{
+    return this.http.get(`${this.baseUrl}/startup/${_id}`).pipe(  
+      catchError(this.handleError)
+  )
+  }
+
+  getinvestor(_id:String | undefined | null): Observable<any>{
+    return this.http.get(`${this.baseUrl}/investor/${_id}`).pipe(  
+      catchError(this.handleError)
+  )
+  }
+
   getinvestors(): Observable<any>{
     return this.http.get(`${this.baseUrl}/investor`)
   }

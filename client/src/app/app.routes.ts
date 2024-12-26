@@ -4,6 +4,7 @@ import { ChoiceFormComponent } from './choice-form/choice-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomeComponent } from './home/home.component';
+import { DisplayComponent } from './display/display.component';
 
 export const routes: Routes = [
     {path:"register",component:UserFormComponent},
@@ -11,5 +12,6 @@ export const routes: Routes = [
     {path:"login",component:LoginFormComponent},
     {path:"",component:LandingPageComponent},
     {path:"home/:type",component:HomeComponent},
-    { path: '*', redirectTo: '/register', pathMatch: 'full' }
+    { path: '*', redirectTo: '/register', pathMatch: 'full' },
+    { path: 'display/:type/:id', component: DisplayComponent }
 ];
