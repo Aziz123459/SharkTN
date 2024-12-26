@@ -1,4 +1,5 @@
 export interface Investor {
+    _id?:string 
     businessRegistrationNumber?:string
     investmentAmount?:string
     message?:string

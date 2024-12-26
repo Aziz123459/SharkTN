@@ -1,0 +1,22 @@
+<div class="container">
+    <!-- Investor Details -->
+    <div *ngIf="type === 'startup' && investorData._id" class="mt-4">
+      <h2>Investor Details</h2>
+      <p><strong>Business Registration Number:</strong> {{ investorData.businessRegistrationNumber }}</p>
+      <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
+      <p><strong>Message:</strong> {{ investorData.message }}</p>
+    </div>
+  
+    <!-- Startup Details -->
+    <div *ngIf="type === 'investor' && startupData._id" class="mt-4">
+      <h2>Startup Details</h2>
+      <p><strong>Name:</strong> {{ startupData.startupName }}</p>
+      <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
+      <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
+      <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
+    </div>
+  
+    <!-- Loading or Error Handling -->
+    <p *ngIf="!investorData._id && !startupData._id">Loading details...</p>
+  </div>
+  

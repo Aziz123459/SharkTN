@@ -24,6 +24,7 @@ export class LoginFormComponent {
           const userType = res.user.acctype 
           localStorage.setItem("token", res.token)
           localStorage.setItem("userId", res.user._id)
+          
           this.router.navigate(['/home',userType],{
             state: { userType:userType } 
           });

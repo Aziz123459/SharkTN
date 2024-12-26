@@ -4,6 +4,7 @@ import { ChoiceFormComponent } from './choice-form/choice-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomeComponent } from './home/home.component';
+import { DisplayComponent } from './display/display.component';
 import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
@@ -15,6 +16,7 @@ export const routes: Routes = [
     {path:"profile",component:ProfileComponent},
     {path:"profile/:id",component:ProfileComponent},
     { path: '*', redirectTo: '/register', pathMatch: 'full' }
+    { path: 'display/:type/:id', component: DisplayComponent }
 ];
 
 // logo          Home Favourits Profile

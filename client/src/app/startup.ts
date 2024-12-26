@@ -1,4 +1,5 @@
 export interface Startup {
+    _id?:string 
     startupName?:string
     StartupLogo?:string
     BusinessRegistrationNumber?:string
