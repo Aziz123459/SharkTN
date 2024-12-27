@@ -44,6 +44,7 @@ const UserSchema = new Schema({
     },
     acctype:{
       type:String,
+      required:[true,"Account Type is required"],
       validate:{
           validator:(t) => ["investor","startup"].includes(t),
           message:(props) => props.value+" is not a valid Account type"

@@ -9,7 +9,7 @@
         <a mat-button routerLink="/home/{{type}}">Home</a>
         <a mat-button routerLink="/favourites" >Favourites</a>
         <a mat-button routerLink="/profile/{{id}}" >Profile</a>
-        <button mat-button class="auth-button" routerLink="/logout">Logout</button>
+        <button mat-button (click)="onLogout()" class="auth-button">Logout</button>
       </nav>
     </div>
 </mat-toolbar>

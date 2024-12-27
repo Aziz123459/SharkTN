@@ -118,9 +118,9 @@
           [(ngModel)]="startupData.StartupLogo"
           name="StartupLogo"
           class="form-control"
-          (change)="onFileSelected($event)"
+          (change)="onFileSelected($event,0)"
         />
-        <small class="form-text text-muted">{{ selectedFileName || 'No file selected' }}</small>
+        <small class="form-text text-muted">{{ selectedFile || 'No file selected' }}</small>
       </div>
 
       <div class="mb-3">
@@ -130,10 +130,10 @@
           id="UploadGovernmentIssuedID"
           name="UploadGovernmentIssuedID"
           class="form-control"
-          (change)="onFileSelected($event)"
+          (change)="onFileSelected($event,1)"
           [(ngModel)]="startupData.UploadGovernmentIssuedID"
         />
-        <small class="form-text text-muted">{{ selectedFileName || 'No file selected' }}</small>
+        <small class="form-text text-muted">{{ selectedFile || 'No file selected' }}</small>
       </div>
 
       <div class="mb-3">
@@ -143,10 +143,10 @@
           id="UploadBusinessRegistrationCertificate"
           name="UploadBusinessRegistrationCertificate"
           class="form-control"
-          (change)="onFileSelected($event)"
+          (change)="onFileSelected($event,2)"
           [(ngModel)]="startupData.UploadBusinessRegistrationCertificate"
         />
-        <small class="form-text text-muted">{{ selectedFileName || 'No file selected' }}</small>
+        <small class="form-text text-muted">{{ selectedFile || 'No file selected' }}</small>
       </div>
 
       <div class="mb-3">
