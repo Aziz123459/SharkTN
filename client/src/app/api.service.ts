@@ -4,6 +4,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { User } from './user';
 import { Startup } from './startup';
 import { Investor } from './investor';
+import { Favorite } from './favorite';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,17 @@ import { Investor } from './investor';
 export class ApiService {
   private baseUrl='http://localhost:5000/api'
   constructor(private http:HttpClient) {}
-  
+  getFavorites(): Observable<Favorite[]> {
+    return this.http.get<Favorite[]>(`${this.baseUrl}/favorites`);
+  }
+
+  addFavorite(favorite: Favorite): Observable<any> {
+    return this.http.post(`${this.baseUrl}/favorites`, favorite);
+  }
+
+  removeFavorite(id: String | undefined |null): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/favorites/${id}`);
+  }
   getstartups(): Observable<any>{
     return this.http.get(`${this.baseUrl}/startup`)
   }
@@ -77,4 +88,5 @@ export class ApiService {
     console.error('an error occurred!', err)
     return throwError(()=>err.error)
   }
+
 }

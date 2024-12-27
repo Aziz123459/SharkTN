@@ -4,6 +4,7 @@ import { Startup } from '../startup';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { CommonModule } from '@angular/common';
+import { Favorite } from '../favorite';
 
 @Component({
   selector: 'app-display',
@@ -43,6 +44,5 @@ type: 'investor' | 'startup' | undefined;
       });
     }
   }
-
   
 }

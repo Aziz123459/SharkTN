@@ -1,6 +1,5 @@
 import UserController from "../controllers/users.controller.js";
 import {Router} from "express"
-import{authenticate} from "../config/jwt.config.js"
 import StartupController from "../controllers/startup.controller.js";
 import InvestorController from "../controllers/investor.controller.js";
 
@@ -58,6 +57,7 @@ router.route("/login")
 
 router.route("/logout")
     .get(UserController.logout)
+
 
 export default router
 
