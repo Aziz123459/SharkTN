@@ -22,6 +22,7 @@ export class ChoiceFormComponent {
   startupData: Startup = {};
   errorMessage: string | null = null;
   userId: string | null = null;
+  selectedFile: File[] = [];
 
 constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService) {}
 
@@ -46,14 +47,27 @@ submitInvestor(): void {
     });
   }
 }
+onFileSelected(event: any,idx : number): void {
+  this.selectedFile[idx] = event.target.files[0];
+}
 
 submitStartup(): void {
-  
     if (this.startupData){
+      this.startupData = {...this.startupData,StartupLogo:this.selectedFile[0].name,UploadGovernmentIssuedID:this.selectedFile[1].name,UploadBusinessRegistrationCertificate:this.selectedFile[2].name}
       this.startupData.userId=this.userId
       this.apiService.creatStartup(this.startupData).subscribe({
         next: (response) => {
+          if (this.selectedFile.length > 0) {
+            this.selectedFile.forEach((file) => {
+              this.apiService.uploadImage(file).subscribe({
+                next: (res) => console.log('Image uploaded successfully:', res),
+                error: (err) => console.error('Error uploading image:', err),
+              });
+            });
+          }
+          console.log("posted")
           console.log('Startup created successfully:', response);
+          
           this.router.navigate(['/home',this.type]);
         },
         error: (err) => {
@@ -63,16 +77,5 @@ submitStartup(): void {
       });
     }
 }
-
-  selectedFileName: string | null = null;
-
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFileName = input.files[0].name;
-    } else {
-      this.selectedFileName = null;
-    }
-  }
 
 }

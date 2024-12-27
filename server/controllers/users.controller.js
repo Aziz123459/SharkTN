@@ -94,16 +94,16 @@ const UserController = {
     },
     register: (req, res) => {
         UserSchema.create(req.body)
-          .then(user => {const userToken = jwt.sign({id: user._id }, process.env.SECRET_KEY);
+            .then(user => {const userToken = jwt.sign({id: user._id }, process.env.SECRET_KEY);
 
-              res.cookie("userToken", userToken).json({ msg: "success registration!", user: user, token:userToken });
-              console.log(userToken)
-          })
-          .catch(err => res.status(400).json(err));
-      },
+                res.cookie("userToken", userToken).json({ msg: "success registration!", user: user, token:userToken });
+                console.log(userToken)
+            })
+            .catch(err => res.status(400).json(err));
+    },
     logout: (req, res) => {
         res.clearCookie('usertoken');
-        res.sendStatus(200);
+        res.status(200).json({ message: 'Logout successful' });
     }
 }
 

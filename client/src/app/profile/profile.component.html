@@ -1,3 +1,4 @@
+<app-home-navbar></app-home-navbar>
 <div class="container">
   <h1 class="text-center">My Profile</h1>
 </div>
@@ -12,16 +13,24 @@
 <p>{{user.phoneNumber}}</p>
 <h4>Address</h4>
 <p>{{user.Adress}}</p>
-<h4>Startup Name</h4>
-<p>{{dataStartup.startupName}}</p>
-<h4>Industry</h4>
-<p>{{dataStartup.Industry}}</p>
-<h4>Linkdin of the Startup</h4>
-<p>{{dataStartup.LinkedInorSocialMediaProfile}}</p>
-<h4>Number of the team</h4>
-<p>{{dataStartup.teamNumber}}</p>
 
+<div *ngIf="type ==='startup'">
+  <h4>Startup Name</h4>
+  <p>{{dataStartup.startupName}}</p>
+  <h4>Industry</h4>
+  <p>{{dataStartup.Industry}}</p>
+  <h4>Linkdin of the Startup</h4>
+  <p>{{dataStartup.LinkedInorSocialMediaProfile}}</p>
+  <h4>Number of the team</h4>
+  <p>{{dataStartup.teamNumber}}</p>
+</div>
 
+<div *ngIf="type ==='investor'">
+  <h4>Message</h4>
+  <p>{{dataInvestor.message}}</p>
+  <h4>investmentAmount</h4>
+  <p>{{dataInvestor.investmentAmount}}</p>
+</div>
 
 
 
@@ -86,17 +95,6 @@
     </div>
   </div> -->
 
-<app-home-navbar></app-home-navbar>
-<p>{{user.firstName}}</p>
-<p>{{user.lastName}}</p>
-<p>{{user.email}}</p>
-<p>{{user.dateOfBirth}}</p>
-<p>{{user.phoneNumber}}</p>
-<p>{{user.Adress}}</p>
-<p>{{dataStartup.startupName}}</p>
-<p>{{dataStartup.Industry}}</p>
-<p>{{dataStartup.LinkedInorSocialMediaProfile}}</p>
-<p>{{dataStartup.teamNumber}}</p>
 
 
 

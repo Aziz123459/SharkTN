@@ -1,4 +1,5 @@
 import investorSchema from '../models/investor.model.js';
+import mongoose from "mongoose";
 
 const InvestorController = {
     create: async (req, res) => {
@@ -51,9 +52,8 @@ const InvestorController = {
         }
     },
     FindInverstorByUserId: async (req, res) => {
-        const userId = mongoose.Types.ObjectId(req.params.userId);
         try {
-            const investor = await investorSchema.find({ userId: userId }).exec();
+            const investor = await investorSchema.find({ userId: req.params.id }).exec();
             return res.json(investor)
         } catch (error) {
             console.error('Error fetching investor:', error);

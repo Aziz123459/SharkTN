@@ -54,8 +54,15 @@ export class ApiService {
   getstartupByUserId(_id:String | undefined |null): Observable<any>{
     return this.http.get(`${this.baseUrl}/startup/user/${_id}`).pipe(
       catchError(this.handleError)
-  )
+    )
   }
+
+  getInvestorById(_id:String | undefined |null): Observable<any>{
+    return this.http.get(`${this.baseUrl}/investor/user/${_id}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   createUser(data:User): Observable<any>{
     return this.http.post(`${this.baseUrl}/register`,data).pipe(  
       catchError(this.handleError)
@@ -89,4 +96,26 @@ export class ApiService {
     return throwError(()=>err.error)
   }
 
+  uploadImage(sticker: File): Observable<any> {
+    console.log(sticker);
+    const data = new FormData();
+    data.append('sticker', sticker, sticker.name);
+    return this.http.post<any>(this.baseUrl+"/upload", data);
+  }
+
+  logoutUser(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/logout`).pipe(
+      catchError((err) => {
+        console.error('Error during logout:', err);
+        return throwError(() => err);
+      })
+    );
+  }
+  
+
+
+
+
+
 }
+

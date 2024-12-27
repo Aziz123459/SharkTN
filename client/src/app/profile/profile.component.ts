@@ -5,6 +5,7 @@ import { ApiService } from '../api.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Startup } from '../startup';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
+import { Investor } from '../investor';
 
 
 @Component({
@@ -14,14 +15,17 @@ import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+  type: string | null = null;
   user : User ={}
   dataStartup : Startup ={}
+  dataInvestor : Investor ={}
   userId: string | null = null;
 
 
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.type= localStorage.getItem('acctype');
     this.userId= localStorage.getItem('userId');
     console.log(this.userId);
     
@@ -35,6 +39,12 @@ export class ProfileComponent {
         next: (data) => {this.dataStartup = data[0]; console.log(data);
         },
         error: err => console.error("Error fetching startup:", err)
+      })
+
+      this.apiService.getInvestorById(this.userId).subscribe({
+        next: (data) => {this.dataInvestor = data[0]; console.log(data);
+        },
+        error: err => console.error("Error fetching investor:", err)
       })
     }
   }
