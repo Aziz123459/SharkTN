@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { User } from '../user';
 import { ApiService } from '../api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Startup } from '../startup';
+import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule,HomeNavbarComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })

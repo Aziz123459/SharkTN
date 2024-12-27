@@ -13,7 +13,6 @@ export const routes: Routes = [
     {path:"login",component:LoginFormComponent},
     {path:"",component:LandingPageComponent},
     {path:"home/:type",component:HomeComponent},
-    {path:"profile",component:ProfileComponent},
     {path:"profile/:id",component:ProfileComponent},
     { path: '*', redirectTo: '/register', pathMatch: 'full' },
     { path: 'display/:type/:id', component: DisplayComponent }
