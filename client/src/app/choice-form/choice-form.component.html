@@ -1,6 +1,6 @@
 <!-- Investor Form -->
 <div class="bgColor">
-<div *ngIf="type === 'investor'" class="container pt-5">
+<div *ngIf="type === 'investor'" class="container pt-5 vh-100">
   <div class="card cardColor shadow p-4">
     <h2 class="mb-4 text-primary text-center">Investor Registration</h2>
     <form (ngSubmit)="submitInvestor()">
@@ -60,12 +60,11 @@
 </div>
 
 <!-- Startup Form -->
-<div class="bgColor mb-5">
-
-  <div *ngIf="type === 'startup'" class="container pt-5 col-8 mb-5 ">
-    <div class="card cardColor shadow p-4 mb-5">
+<div class="bgColor">
+  <div *ngIf="type === 'startup'" class="container pt-5 col-8 ">
+    <div class="card cardColor shadow p-4">
       <h2 class="mb-4 text-success text-center">Startup Registration</h2>
-      <form (ngSubmit)="submitStartup()">
+      <form (ngSubmit)="submitStartup()" >
         <div class="mb-3">
         <label for="StartupName" class="form-label">Startup Name:</label>
         <input
@@ -75,17 +74,6 @@
         name="startupName"
         class="form-control"
         placeholder="Enter your startup name"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="startupEmail" class="form-label">Startup Email:</label>
-        <input
-          type="text"
-          id="startupEmail"
-          [(ngModel)]="startupData.startupEmail"
-          name="startupEmail"
-          class="form-control"
-          placeholder="Enter your startup Email "
         />
       </div>
       <div class="mb-3">

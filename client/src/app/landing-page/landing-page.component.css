@@ -112,3 +112,38 @@
         gap: 80px 200px;
     }
 }
+
+.cont {
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative; /* Necessary for absolute positioning of child elements */
+}
+
+.cont h1 {
+  color: #007bff; /* Blue color */
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  position: relative; /* Necessary for absolute positioning of child elements */
+  animation: move-left 2s infinite; 
+}
+
+.cont h2 {
+  color: #004080; /* Darker blue color */
+  font-size: 2rem;
+  margin-bottom: 10px;
+  position: relative; /* Necessary for absolute positioning of child elements */
+  animation: move-right 2s infinite; 
+}
+
+@keyframes move-left {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes move-right {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}

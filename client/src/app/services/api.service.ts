@@ -127,7 +127,21 @@ getAllStartups(): Observable<any> {
   return this.http.get(`${this.baseUrl}/startups/all`);
 }
 
-
+updateUser(data : User): Observable<any> {
+  return this.http.patch(`${this.baseUrl}/profile/${data._id}`,data).pipe(  
+    catchError(this.handleError)
+  )
+}
+updateInvestor(data : Investor): Observable<any> {
+  return this.http.patch(`${this.baseUrl}/investor/${data._id}`,data).pipe(  
+    catchError(this.handleError)
+  )
+}
+updateStartup(data : Startup): Observable<any> {
+  return this.http.patch(`${this.baseUrl}/startup/${data._id}`,data).pipe(  
+    catchError(this.handleError)
+  )
+}
 
 
 

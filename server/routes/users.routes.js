@@ -23,7 +23,7 @@ router.route("/user/:id")
 
 router.route("/profile/:id")
     .get(UserController.ReadOne)
-    .put(UserController.update)
+    .patch(UserController.update)
     .delete(UserController.DeleteOne)
 
 router.route("/startup")
@@ -31,7 +31,7 @@ router.route("/startup")
 
 router.route("/startup/:id")
     .get(StartupController.ReadOne)
-    .put(StartupController.update)
+    .patch(StartupController.update)
     .delete(StartupController.DeleteOne)
 
 router.route("/startup/user/:id")
@@ -45,7 +45,7 @@ router.route("/investor")
 
 router.route("/investor/:id")
     .get(InvestorController.ReadOne)
-    .put(InvestorController.update)
+    .patch(InvestorController.update)
     .delete(InvestorController.DeleteOne)
 
 router.route("/register")
