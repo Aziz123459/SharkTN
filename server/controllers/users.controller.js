@@ -43,6 +43,34 @@ const UserController = {
             res.status(400).json(err)
         }
     },
+    updateUser : async (req, res) => {
+        const allowedUpdates = ['firstName', 'lastName', 'dateOfBirth', 'phoneNumber'];
+        const updates = Object.keys(req.body);
+    
+        const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' });
+        }
+    
+        try {
+            const userId = req.user.id; // Assuming user ID is in the request
+            const user = await User.findById(userId);
+    
+            if (!user) {
+                return res.status(404).send();
+            }
+    
+            updates.forEach((update) => {
+                user[update] = req.body[update];
+            });
+    
+            await user.save();
+            res.send(user);
+        } catch (e) {
+            res.status(400).send(e);
+        }
+    },
+    
     DeleteOne: async (req, res) => {
         try {
             const DeleteOneUser = await UserSchema.findByIdAndDelete(req.params.id)
@@ -64,12 +92,9 @@ const UserController = {
             if (user === null) {
                 return res.status(400).json({ msg: "Email not found" });
             }
-    console.log("****", user.password);
-    console.log("======", req.body.password);
     
             const correctPassword = await bcrypt.compare(req.body.password, user.password);
     
-            console.log(correctPassword);
             if (!correctPassword) {
                 
                 return res.status(400).json({ msg: "Incorrect password" });

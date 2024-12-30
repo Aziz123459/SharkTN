@@ -28,6 +28,9 @@
   <!-- Investor or Startup for Non-Admin -->
   <div *ngIf="type === 'investor' && startupData._id" class="mt-4">
     <h2>Startup Details</h2>
+    <div class="text-center">
+      <img src="http://localhost:5000/uploads/{{startupData.StartupLogo}}" alt="Logo" width="100px">
+    </div>
     <p><strong>Name:</strong> {{ startupData.startupName }}</p>
     <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
     <p><strong>Startup Email:</strong> {{ startupData.startupEmail }}</p>

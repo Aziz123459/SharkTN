@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Favorite } from '../favorite';
+import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 
 @Component({
   selector: 'app-display',
-  imports: [CommonModule],
+  imports: [CommonModule, HomeNavbarComponent],
   templateUrl: './display.component.html',
   styleUrl: './display.component.css'
 })

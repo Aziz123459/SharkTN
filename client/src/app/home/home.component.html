@@ -1,6 +1,7 @@
 <app-home-navbar></app-home-navbar>
+<div class="page">
 
-<div class="container">
+<div class="container col-md-8 mt-5 pt-2">
   <!-- Dynamic Heading Based on Type -->
   <h1 *ngIf="type === 'startup'" class="mt-5 pt-5">Investors</h1>
   <h1 *ngIf="type === 'investor'" class="mt-5 pt-5">Startups</h1>
@@ -12,8 +13,8 @@
     <!-- Display All Investors -->
     <div *ngIf="allInvestors.length > 0; else noInvestors" class="row">
       <h3>Investor Details</h3>
-      <div *ngFor="let investor of allInvestors" class="col-md-4">
-        <div class="card mb-4 shadow-sm" (click)="onPostClick(investor._id)">
+      <div *ngFor="let investor of allInvestors" class="">
+        <div class="card effect mb-4 shadow-sm" (click)="onPostClick(investor._id)">
           <div class="card-body">
             <h5 class="card-title">Investor Details</h5>
             <p><strong>Business Registration Number:</strong> {{ investor.businessRegistrationNumber }}</p>
@@ -28,10 +29,10 @@
     </ng-template>
 
     <!-- Display All Startups -->
-    <div *ngIf="allStartups.length > 0; else noStartups" class="row mt-4">
+    <div *ngIf="allStartups.length > 0; else noStartups" class="row">
       <h3>Startup Details</h3>
       <div *ngFor="let startup of allStartups" class="col-md-4">
-        <div class="card mb-4 shadow-sm" (click)="onPostClick(startup._id)">
+        <div class="card effect mb-4 shadow-sm" (click)="onPostClick(startup._id)">
           <div class="card-body">
             <h5 class="card-title">Startup Details</h5>
             <p><strong>Name:</strong> {{ startup.startupName }}</p>
@@ -49,17 +50,23 @@
 
   <!-- Investor or Startup for Non-Admin -->
   <div *ngIf="type === 'investor'" class="mt-4">
-    <h2>Startup Details</h2>
+    <div class="text-center mb-5">
+      <h1 >All Startups</h1>
+    </div>
     <div *ngIf="item.length > 0; else noData" class="row">
-      <div *ngFor="let entry of item" class="col-md-4">
-        <div class="card mb-4 shadow-sm" (click)="onPostClick(entry._id)">
+      <div *ngFor="let entry of item" class="col-6">
+        <div class="card effect mb-4 shadow-sm" (click)="onPostClick(entry._id)">
+          <!-- <h5 *ngIf="isStartup(entry)" class="card-header">Startup Details</h5> -->
+          <div class="card-header">
+            <img *ngIf="isStartup(entry)" src="http://localhost:5000/uploads/{{entry.StartupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
+          </div>
           <div class="card-body">
             <ng-container *ngIf="isStartup(entry)">
-              <h5 class="card-title">Startup Details</h5>
               <p><strong>Name:</strong> {{ entry.startupName }}</p>
               <p><strong>Industry:</strong> {{ entry.Industry }}</p>
-              <p><strong>Description:</strong> {{ entry.BriefDescription }}</p>
               <p><strong>Team Number:</strong> {{ entry.teamNumber }}</p>
+              <p><strong>Startup Email:</strong> {{ entry.startupEmail }}</p>
+              <p><strong>Description:</strong> {{ entry.BriefDescription }}</p>
             </ng-container>
           </div>
         </div>
@@ -71,14 +78,14 @@
   </div>
 
   <div *ngIf="type === 'startup'" class="mt-4">
-    <h2>Investor Details</h2>
+    <h2>All Investors</h2>
     <div *ngIf="item.length > 0; else noData" class="row">
       <div *ngFor="let entry of item" class="col-md-4">
-        <div class="card mb-4 shadow-sm" (click)="onPostClick(entry._id)">
+        <div class="card effect mb-4 shadow-sm" (click)="onPostClick(entry._id)">
+          <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5>
           <div class="card-body">
             <ng-container *ngIf="isInvestor(entry)">
-              <h5 class="card-title">Investor Details</h5>
-              <p><strong>Business Registration Number:</strong> {{ entry.businessRegistrationNumber }}</p>
+              <p><strong>Investor Email:</strong> {{ investorData.investorEmail }}</p>
               <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }}</p>
               <p><strong>Message:</strong> {{ entry.message }}</p>
             </ng-container>
@@ -91,3 +98,5 @@
     </ng-template>
   </div>
 </div>
+</div>
+<app-logged-in-footer></app-logged-in-footer>

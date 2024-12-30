@@ -7,10 +7,11 @@ import { ApiService } from '../services/api.service';
 import { Investor } from '../investor';
 import { Startup } from '../startup';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
+import { LoggedInFooterComponent } from '../logged-in-footer/logged-in-footer.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, MatCardModule, MatFormFieldModule,HomeNavbarComponent,RouterModule],
+  imports: [CommonModule, MatCardModule, MatFormFieldModule,HomeNavbarComponent,RouterModule, LoggedInFooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
