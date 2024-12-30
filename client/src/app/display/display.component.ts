@@ -31,21 +31,22 @@ type: 'investor' | 'startup' | 'admin' |undefined;
   }
 
   fetchDetails(): void {
-    if (this.type === 'startup'||'admin') {
+    if (this.type === 'startup' || this.type === 'admin') {
       // Fetch investor details for a startup user
       this.apiService.getinvestor(this.id).subscribe({
         next: (data: Investor) => (this.investorData = data),
         error: (err) => console.error('Error fetching investor details:', err)
       });
-    } else if (this.type === 'investor'||'admin') {
+    } 
+    if (this.type === 'investor' || this.type === 'admin') {
       // Fetch startup details for an investor user
       this.apiService.getstartup(this.id).subscribe({
         next: (data: Startup) => (this.startupData = data),
         error: (err) => console.error('Error fetching startup details:', err)
       });
-    } 
-    
+    }
   }
+  
   
   sendEmail(): void {
     const email =

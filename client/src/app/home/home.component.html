@@ -50,13 +50,10 @@
 
   <!-- Investor or Startup for Non-Admin -->
   <div *ngIf="type === 'investor'" class="mt-4">
-    <div class="text-center mb-5">
       <h1 >All Startups</h1>
-    </div>
     <div *ngIf="item.length > 0; else noData" class="row">
-      <div *ngFor="let entry of item" class="col-6">
+      <div *ngFor="let entry of item"  class="col-md-4">
         <div class="card effect mb-4 shadow-sm" (click)="onPostClick(entry._id)">
-          <!-- <h5 *ngIf="isStartup(entry)" class="card-header">Startup Details</h5> -->
           <div class="card-header">
             <img *ngIf="isStartup(entry)" src="http://localhost:5000/uploads/{{entry.StartupLogo}}" alt="Logo" height="80px" width="80px" style="border-radius: 50%;">
           </div>
@@ -82,7 +79,7 @@
     <div *ngIf="item.length > 0; else noData" class="row">
       <div *ngFor="let entry of item" class="col-md-4">
         <div class="card effect mb-4 shadow-sm" (click)="onPostClick(entry._id)">
-          <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5>
+          <!-- <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5> -->
           <div class="card-body">
             <ng-container *ngIf="isInvestor(entry)">
               <p><strong>Investor Email:</strong> {{ investorData.investorEmail }}</p>
