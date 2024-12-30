@@ -111,7 +111,7 @@ export class ApiService {
       })
     );
   }
-  deleteUser(_id:string | undefined ): Observable<any> {
+  deleteUser(_id:string | undefined |null ): Observable<any> {
     return this.http.delete(`${this.baseUrl}/user/${_id}`);
   }
   
@@ -127,6 +127,27 @@ getAllStartups(): Observable<any> {
   return this.http.get(`${this.baseUrl}/startups/all`);
 }
 
+getStartupByUserId(userId: string |null|undefined): Observable<Startup> {
+  return this.http.get<Startup>(`${this.baseUrl}/startups/${userId}`);
+}
+
+// Fetch the related investor based on user ID
+getInvestorByUserId(userId: string |null|undefined): Observable<Investor> {
+  return this.http.get<Investor>(`${this.baseUrl}/investors/${userId}`);
+}
+
+// Delete user by ID
+delete(userId: string | null | undefined): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/users/${userId}`);
+}
+
+deleteStartupById(_id: string | null | undefined):Observable<any> {
+  return this.http.delete<Startup>(`${this.baseUrl}/startup/${_id}`)
+}
+
+deleteInvestorById(_id: string | null | undefined):Observable<any> {
+  return this.http.delete<Investor>(`${this.baseUrl}/investor/${_id}`)
+}
 
 
 

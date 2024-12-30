@@ -21,7 +21,7 @@ type: 'investor' | 'startup' | 'admin' |undefined;
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.type = this.route.snapshot.paramMap.get('type') as 'investor' | 'startup';
+    this.type = this.route.snapshot.paramMap.get('type') as 'investor' | 'startup' | 'admin';
     this.id= this.route.snapshot.paramMap.get('id');
 
     if (this.type && this.id) {
@@ -30,13 +30,13 @@ type: 'investor' | 'startup' | 'admin' |undefined;
   }
 
   fetchDetails(): void {
-    if (this.type === 'startup') {
+    if (this.type === 'startup'||'admin') {
       // Fetch investor details for a startup user
       this.apiService.getinvestor(this.id).subscribe({
         next: (data: Investor) => (this.investorData = data),
         error: (err) => console.error('Error fetching investor details:', err)
       });
-    } else if (this.type === 'investor') {
+    } else if (this.type === 'investor'||'admin') {
       // Fetch startup details for an investor user
       this.apiService.getstartup(this.id).subscribe({
         next: (data: Startup) => (this.startupData = data),

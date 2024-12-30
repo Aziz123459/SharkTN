@@ -63,7 +63,11 @@ router.route("/login")
 router.route("/logout")
     .get(UserController.logout)
 
+router.route("/investors/:userId")
+    .get(InvestorController.FindInverstorByUserId)
 
+router.route("/startups/:userId")
+    .get(StartupController.FindStartupByUserId)
 export default router
 
 

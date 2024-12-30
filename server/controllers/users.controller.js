@@ -46,6 +46,7 @@ const UserController = {
     DeleteOne: async (req, res) => {
         try {
             const DeleteOneUser = await UserSchema.findByIdAndDelete(req.params.id)
+            console.log("*******************",res)
             res.json({ response: " ok " })
         } catch (err) {
             console.log(err)

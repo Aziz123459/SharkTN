@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home-navbar',
-  imports: [RouterModule, MatToolbarModule, MatButtonModule,RouterModule,CommonModule],
+  imports: [ MatToolbarModule, MatButtonModule,RouterModule,CommonModule],
   templateUrl: './home-navbar.component.html',
   styleUrl: './home-navbar.component.css'
 })

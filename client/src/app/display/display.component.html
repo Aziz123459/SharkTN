@@ -4,7 +4,7 @@
     <h2>Admin Dashboard</h2>
 
     <!-- Display All Investors -->
-    <div *ngIf="investorData && investorData._id" class="mt-4">
+    <div *ngIf="investorData && investorData._id && type ==='admin'" class="mt-4">
       <h3>Investor Details</h3>
       <p><strong>Business Registration Number:</strong> {{ investorData.businessRegistrationNumber }}</p>
       <p><strong>Investor Email:</strong> {{ investorData.investorEmail }}</p>
@@ -14,7 +14,7 @@
     </div>
 
     <!-- Display All Startups -->
-    <div *ngIf="startupData && startupData._id" class="mt-4">
+    <div *ngIf="startupData && startupData._id && type==='admin'" class="mt-4">
       <h3>Startup Details</h3>
       <p><strong>Name:</strong> {{ startupData.startupName }}</p>
       <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
@@ -46,5 +46,5 @@
   </div>
 
   <!-- Loading or Error Handling -->
-  <p *ngIf="!investorData._id && !startupData._id">Loading details...</p>
+  <p *ngIf="!investorData._id && !startupData._id ">Loading details...</p>
 </div>

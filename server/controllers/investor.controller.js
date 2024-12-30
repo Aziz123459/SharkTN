@@ -53,12 +53,28 @@ const InvestorController = {
     },
     FindInverstorByUserId: async (req, res) => {
         try {
-            const investor = await investorSchema.find({ userId: req.params.id }).exec();
-            return res.json(investor)
+            const { userId } = req.params;
+    
+            // Validate ObjectId format
+            if (!mongoose.Types.ObjectId.isValid(userId)) {
+                return res.status(400).json({ message: 'Invalid userId format' });
+            }
+    
+            // Convert to ObjectId
+            const objectId = new mongoose.Types.ObjectId(userId);
+    
+            // Find the investor
+            const investor = await investorSchema.findOne({ userId: objectId }).exec();
+    
+            if (!investor) {
+                return res.status(404).json({ message: 'Investor not found' });
+            }
+            console.log("********************",investor)
+            return res.json(investor);
         } catch (error) {
             console.error('Error fetching investor:', error);
-        }    
-    },
+            res.status(500).json({ message: 'Server error' });
+        }},
     getAllInvestors :async (req, res) => {
         try {
           const investors = await investorSchema.find(); // Fetch all investors

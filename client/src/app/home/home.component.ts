@@ -88,8 +88,8 @@ export class HomeComponent {
     }
   }
   
-  onPostClick(id: string | undefined): void {
-    this.router.navigate(['/display', this.type, id]);
+  onPostClick(_id: string | undefined ): void {
+    this.router.navigate(['/display', this.type, _id]);
   }
   
   

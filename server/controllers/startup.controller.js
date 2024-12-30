@@ -60,13 +60,30 @@ const StartupController = {
             res.status(400).json(err)
         }
     },
-    FindStartupByUserId: async (req, res) => {        
+    FindStartupByUserId: async (req, res) => {
         try {
-            const startup = await StartUpSchema.find({ userId: req.params.id }).exec();
-            return res.json(startup)
+            const { userId } = req.params;
+    
+            // Validate ObjectId format
+            if (!mongoose.Types.ObjectId.isValid(userId)) {
+                return res.status(400).json({ message: 'Invalid userId format' });
+            }
+    
+            // Convert to ObjectId
+            const objectId = new mongoose.Types.ObjectId(userId);
+    
+            // Find the startup
+            const startup = await StartUpSchema.findOne({ userId: objectId }).exec();
+    
+            if (!startup) {
+                return res.status(404).json({ message: 'Startup not found' });
+            }
+    
+            return res.json(startup);
         } catch (error) {
             console.error('Error fetching startup:', error);
-        }    
+            res.status(500).json({ message: 'Server error' });
+        }
     },
     getAllStartups :async (req, res) => {
         try {

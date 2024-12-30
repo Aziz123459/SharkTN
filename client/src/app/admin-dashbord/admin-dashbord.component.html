@@ -1,24 +1,63 @@
 <app-home-navbar></app-home-navbar>
+
 <h1 class="mt-5 pt-5">Admin Dashboard</h1>
-<table class="user-table">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>last Name</th>
-      <th>Email</th>
-      <th>Account Type</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.firstName }}</td>
-      <td>{{ user.lastName }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.acctype}}</td>
-      <td>
-        <button (click)="deleteUser(user._id)" class="delete-button">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+<!-- Startup Table -->
+<div *ngIf="startups.length > 0">
+  <h3 class="mt-4">Startups</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of startups">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.acctype }}</td>
+        <td>
+          <button (click)="deleteUser(user._id,user.acctype)" class="delete-button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Investor Table -->
+<div *ngIf="investors.length > 0">
+  <h3 class="mt-4">Investors</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of investors">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.acctype }}</td>
+        <td>
+          <button (click)="deleteUser(user._id,user.acctype)" class="delete-button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- If no users, show no data message -->
+<div *ngIf="startups.length === 0 && investors.length === 0">
+  <p>No users available.</p>
+</div>
+
