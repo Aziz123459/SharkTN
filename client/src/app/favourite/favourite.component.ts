@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Investor } from '../investor';
 import { Startup } from '../startup';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Favorite } from '../favorite';
 

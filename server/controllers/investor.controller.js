@@ -58,6 +58,15 @@ const InvestorController = {
         } catch (error) {
             console.error('Error fetching investor:', error);
         }    
+    },
+    getAllInvestors :async (req, res) => {
+        try {
+          const investors = await investorSchema.find(); // Fetch all investors
+          res.json(investors); // Send investors as JSON response
+        } catch (err) {
+            console.error('Error fetching investors:', err);
+            res.status(500).send('Server Error');
+        }
     }
 }
 

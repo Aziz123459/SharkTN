@@ -46,6 +46,11 @@ const StartUpSchema= new Schema(
         userId:{
             type:mongoose.Schema.Types.ObjectId,
             ref: User
+        },
+        startupEmail:{
+            type:String,
+            required:[true,"startup email is required"]
+
         }
 
     },

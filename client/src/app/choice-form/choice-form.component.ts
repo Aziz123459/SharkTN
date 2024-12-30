@@ -6,7 +6,7 @@ import { Investor } from '../investor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 
 
 

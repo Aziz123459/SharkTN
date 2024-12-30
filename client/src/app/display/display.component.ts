@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Investor } from '../investor';
 import { Startup } from '../startup';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Favorite } from '../favorite';
 
@@ -13,11 +13,11 @@ import { Favorite } from '../favorite';
   styleUrl: './display.component.css'
 })
 export class DisplayComponent {
-type: 'investor' | 'startup' | undefined;
+type: 'investor' | 'startup' | 'admin' |undefined;
   id: string | undefined |null;
   investorData: Investor = {} as Investor;
   startupData: Startup = {} as Startup;
-
+  
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit(): void {
@@ -31,18 +31,30 @@ type: 'investor' | 'startup' | undefined;
 
   fetchDetails(): void {
     if (this.type === 'startup') {
-      // investor details
+      // Fetch investor details for a startup user
       this.apiService.getinvestor(this.id).subscribe({
         next: (data: Investor) => (this.investorData = data),
         error: (err) => console.error('Error fetching investor details:', err)
       });
     } else if (this.type === 'investor') {
-      // startup details
+      // Fetch startup details for an investor user
       this.apiService.getstartup(this.id).subscribe({
         next: (data: Startup) => (this.startupData = data),
         error: (err) => console.error('Error fetching startup details:', err)
       });
-    }
+    } 
+    
+  }
+  
+  sendEmail(): void {
+    const email =
+      this.type === 'investor'
+        ? this.investorData.investorEmail
+        : this.startupData.startupEmail;
+        console.log('Email:', email); // Debugging
+  
+    // Open the user's default email client with only the email pre-filled
+    window.location.href = `mailto:${email}`;
   }
   
 }

@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-home-navbar',
-  imports: [RouterModule, MatToolbarModule, MatButtonModule,RouterModule],
+  imports: [RouterModule, MatToolbarModule, MatButtonModule,RouterModule,CommonModule],
   templateUrl: './home-navbar.component.html',
   styleUrl: './home-navbar.component.css'
 })

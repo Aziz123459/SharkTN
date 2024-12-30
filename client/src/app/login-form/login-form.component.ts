@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from '../user';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

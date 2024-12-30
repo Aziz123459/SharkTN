@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { User } from './user';
-import { Startup } from './startup';
-import { Investor } from './investor';
-import { Favorite } from './favorite';
+import { User } from '../user';
+import { Startup } from '../startup';
+import { Investor } from '../investor';
+import { Favorite } from '../favorite';
 
 @Injectable({
   providedIn: 'root'
@@ -111,7 +111,22 @@ export class ApiService {
       })
     );
   }
+  deleteUser(_id:string | undefined ): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/user/${_id}`);
+  }
   
+  // In apiService.ts
+
+// Fetch all investors
+getAllInvestors(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/investors/all`);
+}
+
+// Fetch all startups
+getAllStartups(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/startups/all`);
+}
+
 
 
 

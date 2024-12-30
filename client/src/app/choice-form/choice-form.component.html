@@ -14,6 +14,17 @@
           placeholder="Enter your business registration number"
         />
       </div>
+      <div class="mb-3">
+        <label for="investorEmail" class="form-label">Your email:</label>
+        <input
+          type="text"
+          id="investorEmail"
+          [(ngModel)]="investorData.investorEmail"
+          name="investorEmail"
+          class="form-control"
+          placeholder="your Email"
+        />
+      </div>
 
       <div class="mb-3">
         <label for="investmentAmount" class="form-label">Investment Amount:</label>
@@ -60,6 +71,17 @@
           name="startupName"
           class="form-control"
           placeholder="Enter your startup name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="startupEmail" class="form-label">Startup Email:</label>
+        <input
+          type="text"
+          id="startupEmail"
+          [(ngModel)]="startupData.startupEmail"
+          name="startupEmail"
+          class="form-control"
+          placeholder="Enter your startup Email "
         />
       </div>
       <div class="mb-3">
