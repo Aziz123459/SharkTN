@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { User } from './user';
-import { Startup } from './startup';
-import { Investor } from './investor';
+import { User } from '../user';
+import { Startup } from '../startup';
+import { Investor } from '../investor';
+import { Favorite } from '../favorite';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,17 @@ import { Investor } from './investor';
 export class ApiService {
   private baseUrl='http://localhost:5000/api'
   constructor(private http:HttpClient) {}
-  
+  getFavorites(): Observable<Favorite[]> {
+    return this.http.get<Favorite[]>(`${this.baseUrl}/favorites`);
+  }
+
+  addFavorite(favorite: Favorite): Observable<any> {
+    return this.http.post(`${this.baseUrl}/favorites`, favorite);
+  }
+
+  removeFavorite(id: String | undefined |null): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/favorites/${id}`);
+  }
   getstartups(): Observable<any>{
     return this.http.get(`${this.baseUrl}/startup`)
   }
@@ -39,17 +50,6 @@ export class ApiService {
   getuser(_id: string | undefined): Observable<any>{
     return this.http.get(`${this.baseUrl}/profile/${_id}`)
   }
-
-  updateUser(data: Partial<User>): Observable<any> {
-    return this.http.patch(`${this.baseUrl}/user`, data).pipe(
-      catchError((error) => {
-        console.error('Error updating user:', error);
-        return throwError(() => error);
-      })
-    );
-  }
-  
-  
 
   getstartupByUserId(_id:String | undefined |null): Observable<any>{
     return this.http.get(`${this.baseUrl}/startup/user/${_id}`).pipe(
@@ -111,4 +111,26 @@ export class ApiService {
       })
     );
   }
+  deleteUser(_id:string | undefined ): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/user/${_id}`);
+  }
+  
+  // In apiService.ts
+
+// Fetch all investors
+getAllInvestors(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/investors/all`);
 }
+
+// Fetch all startups
+getAllStartups(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/startups/all`);
+}
+
+
+
+
+
+
+}
+

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { User } from '../user';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Startup } from '../startup';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';

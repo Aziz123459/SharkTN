@@ -24,7 +24,12 @@ const investorSchema = new Schema({
     userId:{
                 type:mongoose.Schema.Types.ObjectId,
                 ref: User
-            }
+    },
+    investorEmail:{
+        type:String,
+        required:[true,"your email is required"]
+    
+    }
 }, { timestamps: true }); 
 
 const Investor = model('Investor', investorSchema);

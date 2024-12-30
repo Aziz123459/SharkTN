@@ -1,6 +1,5 @@
 import UserController from "../controllers/users.controller.js";
 import {Router} from "express"
-import{authenticate} from "../config/jwt.config.js"
 import StartupController from "../controllers/startup.controller.js";
 import InvestorController from "../controllers/investor.controller.js";
 
@@ -9,7 +8,9 @@ const router = Router()
 // Authenticated route
 router.get("/api/users", UserController.ReadAll);
 
+router.get('/startups/all',StartupController.getAllStartups);
 
+router.get('/investors/all',InvestorController.getAllInvestors );
 
 router.route("/user")
     // .post(UserController.create)
@@ -61,6 +62,7 @@ router.route("/login")
 
 router.route("/logout")
     .get(UserController.logout)
+
 
 export default router
 

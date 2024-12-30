@@ -4,6 +4,7 @@ export interface Investor {
     investmentAmount?:string
     message?:string
     userId?:string | null
+    investorEmail?:string
     createdAt?: string
     updatedAt?: string 
 }

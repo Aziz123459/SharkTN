@@ -10,6 +10,7 @@ export interface Startup {
     LinkedInorSocialMediaProfile?:string
     teamNumber?:Number
     userId?:string | null
+    startupEmail?:string
     createdAt?: string
     updatedAt?: string
 }

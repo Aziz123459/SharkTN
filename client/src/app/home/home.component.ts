@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 import { Investor } from '../investor';
 import { Startup } from '../startup';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
@@ -16,10 +16,12 @@ import { LoggedInFooterComponent } from '../logged-in-footer/logged-in-footer.co
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  type: 'investor' | 'startup' | null = null; 
+  type: 'investor' | 'startup' | 'admin'| null = null; 
   item: (Investor | Startup)[] = []; 
   investorData: Investor = {};
   startupData: Startup = {};
+  allInvestors: Investor[] = [];
+  allStartups: Startup[] = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -48,9 +50,29 @@ export class HomeComponent {
         next: (data: Startup[]) => (this.item = data),
         error: (err) => console.error('Error fetching startups:', err),
         complete: () => console.info('Fetched all startups')
-      });
-    } 
+      });}
+      else if (this.type === 'admin') {
+        // Fetch all investors for an admin
+        this.apiService.getAllInvestors().subscribe({
+          next: (data: Investor[]) => {
+            this.allInvestors = data; // Store the list of all investors
+            console.log('Fetched all investors:', data);
+          },
+          error: (err) => console.error('Error fetching all investors:', err)
+        });
+    
+        // Fetch all startups for an admin
+        this.apiService.getAllStartups().subscribe({
+          next: (data: Startup[]) => {
+            this.allStartups = data; // Store the list of all startups
+            console.log('Fetched all startups:', data);
+          },
+          error: (err) => console.error('Error fetching all startups:', err)
+        });
   }
+}
+    
+    
   getone(): void {
     if (this.type === 'startup') {
       this.apiService.getinvestor(this.investorData._id).subscribe({
@@ -85,3 +107,4 @@ export class HomeComponent {
     return this.type === 'investor';
   }
 }
+

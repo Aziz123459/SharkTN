@@ -67,8 +67,16 @@ const StartupController = {
         } catch (error) {
             console.error('Error fetching startup:', error);
         }    
+    },
+    getAllStartups :async (req, res) => {
+        try {
+          const startups = await StartUpSchema.find(); // Fetch all startups
+          res.json(startups); // Send startups as JSON response
+        } catch (err) {
+            console.error('Error fetching startups:', err);
+            res.status(500).send('Server Error');
+        }
     }
-    
 }
 
 export default StartupController

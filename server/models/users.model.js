@@ -44,6 +44,7 @@ const UserSchema = new Schema({
     },
     acctype:{
       type:String,
+      enum: ['investor','startup', 'admin'],
       required:[true,"Account Type is required"],
       validate:{
           validator:(t) => ["investor","startup"].includes(t),

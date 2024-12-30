@@ -1,26 +1,62 @@
 <app-home-navbar></app-home-navbar>
-<div class="page">
-  <div class="container mt-5 pt-5 col-md-8">
-    <!-- Dynamic Heading Based on Type -->
-    <h1 *ngIf="type === 'startup'">Investors</h1>
-    <h1 *ngIf="type === 'investor'">Discover our startups</h1>
-  
-    <!-- List Entries -->
-    <div *ngIf="item.length > 0; else noData" class="row">
-      <div *ngFor="let entry of item" class="col-md-6">
-        <div class="effect card mb-4 shadow-sm" (click)="onPostClick(entry._id)">
-          <h5 *ngIf="isInvestor(entry)" class="card-header">Investor Details</h5>
-          <h5 *ngIf="isStartup(entry)" class="card-header">Startup Details</h5>
+
+<div class="container">
+  <!-- Dynamic Heading Based on Type -->
+  <h1 *ngIf="type === 'startup'">Investors</h1>
+  <h1 *ngIf="type === 'investor'">Startups</h1>
+  <h1 *ngIf="type === 'admin'">Admin Dashboard</h1>
+
+  <!-- Admin Home Page -->
+  <div *ngIf="type === 'admin'" class="mt-4">
+    <h2>Admin Dashboard</h2>
+
+    <!-- Display All Investors -->
+    <div *ngIf="allInvestors.length > 0; else noInvestors" class="row">
+      <h3>Investor Details</h3>
+      <div *ngFor="let investor of allInvestors" class="col-md-4">
+        <div class="card mb-4 shadow-sm" (click)="onPostClick(investor._id)">
           <div class="card-body">
-            <!-- Investor Details -->
-            <ng-container *ngIf="isInvestor(entry)">
-              <p><strong>Email:</strong> {{ entry.businessRegistrationNumber }}</p>
-              <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }}</p>
-              <p><strong>Message:</strong> {{ entry.message }}</p>
-            </ng-container>
-  
-            <!-- Startup Details -->
+            <h5 class="card-title">Investor Details</h5>
+            <p><strong>Business Registration Number:</strong> {{ investor.businessRegistrationNumber }}</p>
+            <p><strong>Investment Amount:</strong> {{ investor.investmentAmount }}</p>
+            <p><strong>Message:</strong> {{ investor.message }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noInvestors>
+      <p>No investors available.</p>
+    </ng-template>
+
+    <!-- Display All Startups -->
+    <div *ngIf="allStartups.length > 0; else noStartups" class="row mt-4">
+      <h3>Startup Details</h3>
+      <div *ngFor="let startup of allStartups" class="col-md-4">
+        <div class="card mb-4 shadow-sm" (click)="onPostClick(startup._id)">
+          <div class="card-body">
+            <h5 class="card-title">Startup Details</h5>
+            <p><strong>Name:</strong> {{ startup.startupName }}</p>
+            <p><strong>Industry:</strong> {{ startup.Industry }}</p>
+            <p><strong>Description:</strong> {{ startup.BriefDescription }}</p>
+            <p><strong>Team Number:</strong> {{ startup.teamNumber }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noStartups>
+      <p>No startups available.</p>
+    </ng-template>
+  </div>
+
+  <!-- Investor or Startup for Non-Admin -->
+  <div *ngIf="type === 'investor'" class="mt-4">
+    <h2>Startup Details</h2>
+    <div *ngIf="item.length > 0; else noData" class="row">
+      <div *ngFor="let entry of item" class="col-md-4">
+        <div class="card mb-4 shadow-sm" (click)="onPostClick(entry._id)">
+          <div class="card-body">
             <ng-container *ngIf="isStartup(entry)">
+              <h5 class="card-title">Startup Details</h5>
               <p><strong>Name:</strong> {{ entry.startupName }}</p>
               <p><strong>Industry:</strong> {{ entry.Industry }}</p>
               <p><strong>Description:</strong> {{ entry.BriefDescription }}</p>
@@ -30,12 +66,29 @@
         </div>
       </div>
     </div>
-  
     <ng-template #noData>
-      <p>No data available.</p>
+      <p>No startups available.</p>
     </ng-template>
-  
   </div>
-  
+
+  <div *ngIf="type === 'startup'" class="mt-4">
+    <h2>Investor Details</h2>
+    <div *ngIf="item.length > 0; else noData" class="row">
+      <div *ngFor="let entry of item" class="col-md-4">
+        <div class="card mb-4 shadow-sm" (click)="onPostClick(entry._id)">
+          <div class="card-body">
+            <ng-container *ngIf="isInvestor(entry)">
+              <h5 class="card-title">Investor Details</h5>
+              <p><strong>Business Registration Number:</strong> {{ entry.businessRegistrationNumber }}</p>
+              <p><strong>Investment Amount:</strong> {{ entry.investmentAmount }}</p>
+              <p><strong>Message:</strong> {{ entry.message }}</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noData>
+      <p>No investors available.</p>
+    </ng-template>
+  </div>
 </div>
-<app-logged-in-footer></app-logged-in-footer>

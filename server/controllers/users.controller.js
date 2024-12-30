@@ -117,14 +117,32 @@ const UserController = {
             return res.status(500).json({ msg: "Server error", error: err.message });
         }
     },
-    register: (req, res) => {
-        UserSchema.create(req.body)
-            .then(user => {const userToken = jwt.sign({id: user._id }, process.env.SECRET_KEY);
-
-                res.cookie("userToken", userToken).json({ msg: "success registration!", user: user, token:userToken });
-                console.log(userToken)
-            })
-            .catch(err => res.status(400).json(err));
+    register: async (req, res) => {
+        try {
+            // Check if the email already exists
+            const existingUser = await UserSchema.findOne({ email: req.body.email });
+            if (existingUser) {
+                return res.status(400).json({ msg: "Email already exists." });
+            }
+    
+            // Create a new user
+            const user = await UserSchema.create(req.body);
+    
+            // Generate a JWT token
+            const userToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
+    
+            // Set the token as a cookie and respond with success
+            res.cookie("userToken", userToken).json({
+                msg: "Success registration!",
+                user: user,
+                token: userToken,
+            });
+    
+            console.log(userToken);
+        } catch (err) {
+            // Handle errors
+            res.status(400).json(err);
+        }
     },
     logout: (req, res) => {
         res.clearCookie('usertoken');

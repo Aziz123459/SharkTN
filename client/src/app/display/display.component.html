@@ -1,20 +1,63 @@
 <app-home-navbar></app-home-navbar>
 <div class="page d-flex justify-content-center align-items-center vh-100">
   <div class="container">
-    <!-- Investor Details -->
-    <div *ngIf="type === 'startup' && investorData._id" class="card shadow-sm mb-4">
+  <!-- Admin Display All Users -->
+  <div *ngIf="type === 'admin'" class="mt-4">
+    <h2>Admin Dashboard</h2>
+
+    <!-- Display All Investors -->
+    <div *ngIf="investorData && investorData._id" class="card shadow-sm mb-4">
       <div class="card-header bg-secondary text-white">
-        <h2 class="card-title">Investor Details</h2>
+        <h3 class="card-title">Investor Details</h3>
       </div>
       <div class="card-body ">
         <p><strong>Business Registration Number:</strong> {{ investorData.businessRegistrationNumber }}</p>
-        <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
+        <p><strong>Investor Email:</strong> {{ investorData.investorEmail }}</p>
+      <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
         <p><strong>Message:</strong> {{ investorData.message }}</p>
         <div class="p-2 text-end">        
           <button class="btn btn-primary btn-sm">Get in Contact</button>
         </div>
       </div>
+      <button (click)="sendEmail()" [disabled]="!investorData.investorEmail">Contact</button>
     </div>
+
+    <!-- Display All Startups -->
+    <div *ngIf="startupData && startupData._id" class="mt-4">
+      <h3>Startup Details</h3>
+      <p><strong>Name:</strong> {{ startupData.startupName }}</p>
+      <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
+      <p><strong>Startup Email:</strong> {{ startupData.startupEmail }}</p>
+      <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
+      <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
+      <button (click)="sendEmail()" [disabled]="!startupData.startupEmail">Contact</button>
+    </div>
+  </div>
+
+  <!-- Investor or Startup for Non-Admin -->
+  <div *ngIf="type === 'investor' && startupData._id" class="mt-4">
+    <h2>Startup Details</h2>
+    <p><strong>Name:</strong> {{ startupData.startupName }}</p>
+    <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
+    <p><strong>Startup Email:</strong> {{ startupData.startupEmail }}</p>
+    <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
+    <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
+    <button (click)="sendEmail()" [disabled]="!startupData.startupEmail">Contact</button>
+  </div>
+
+  <div *ngIf="type === 'startup' && investorData._id" class="mt-4">
+    <h2>Investor Details</h2>
+    <p><strong>Business Registration Number:</strong> {{ investorData.businessRegistrationNumber }}</p>
+    <p><strong>Investor Email:</strong> {{ investorData.investorEmail }}</p>
+    <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
+    <p><strong>Message:</strong> {{ investorData.message }}</p>
+    <button (click)="sendEmail()" [disabled]="!investorData.investorEmail">Contact</button>
+  </div>
+
+  <!-- Loading or Error Handling -->
+  <p *ngIf="!investorData._id && !startupData._id">Loading details...</p>
+</div>
+
   
     <!-- Startup Details -->
     <div *ngIf="type === 'investor' && startupData._id" class="card shadow-sm">
