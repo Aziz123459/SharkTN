@@ -40,6 +40,17 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/profile/${_id}`)
   }
 
+  updateUser(data: Partial<User>): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/user`, data).pipe(
+      catchError((error) => {
+        console.error('Error updating user:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+  
+  
+
   getstartupByUserId(_id:String | undefined |null): Observable<any>{
     return this.http.get(`${this.baseUrl}/startup/user/${_id}`).pipe(
       catchError(this.handleError)
@@ -100,11 +111,4 @@ export class ApiService {
       })
     );
   }
-  
-
-
-
-
-
 }
-

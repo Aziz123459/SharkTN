@@ -4,10 +4,11 @@ import { Startup } from '../startup';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { CommonModule } from '@angular/common';
+import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 
 @Component({
   selector: 'app-display',
-  imports: [CommonModule],
+  imports: [CommonModule, HomeNavbarComponent],
   templateUrl: './display.component.html',
   styleUrl: './display.component.css'
 })

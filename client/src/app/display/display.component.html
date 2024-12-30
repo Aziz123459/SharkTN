@@ -1,22 +1,41 @@
-<div class="container">
+<app-home-navbar></app-home-navbar>
+<div class="page d-flex justify-content-center align-items-center vh-100">
+  <div class="container">
     <!-- Investor Details -->
-    <div *ngIf="type === 'startup' && investorData._id" class="mt-4">
-      <h2>Investor Details</h2>
-      <p><strong>Business Registration Number:</strong> {{ investorData.businessRegistrationNumber }}</p>
-      <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
-      <p><strong>Message:</strong> {{ investorData.message }}</p>
+    <div *ngIf="type === 'startup' && investorData._id" class="card shadow-sm mb-4">
+      <div class="card-header bg-secondary text-white">
+        <h2 class="card-title">Investor Details</h2>
+      </div>
+      <div class="card-body ">
+        <p><strong>Business Registration Number:</strong> {{ investorData.businessRegistrationNumber }}</p>
+        <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
+        <p><strong>Message:</strong> {{ investorData.message }}</p>
+        <div class="p-2 text-end">        
+          <button class="btn btn-primary btn-sm">Get in Contact</button>
+        </div>
+      </div>
     </div>
   
     <!-- Startup Details -->
-    <div *ngIf="type === 'investor' && startupData._id" class="mt-4">
-      <h2>Startup Details</h2>
-      <p><strong>Name:</strong> {{ startupData.startupName }}</p>
-      <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
-      <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
-      <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
+    <div *ngIf="type === 'investor' && startupData._id" class="card shadow-sm">
+      <div class="card-header bg text-white">
+        <h2 class="card-title">Startup Details</h2>
+      </div>
+      <div class="card-body">
+        <p><strong>Name:</strong> {{ startupData.startupName }}</p>
+        <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
+        <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
+        <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
+      </div>
+      <div class="p-2 text-end">        
+        <button class="btn btn-primary btn-sm">Get in Contact</button>
+      </div>
+      
     </div>
   
     <!-- Loading or Error Handling -->
-    <p *ngIf="!investorData._id && !startupData._id">Loading details...</p>
+    <div *ngIf="!investorData._id && !startupData._id" class="text-center">
+      <p class="text-muted">Loading details...</p>
+    </div>
   </div>
-  
+</div>

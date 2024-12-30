@@ -60,6 +60,7 @@ img {
 
 img:hover {
     transform: scale(1.1); 
+    cursor: pointer;
 }
 
 figure {
@@ -196,4 +197,8 @@ input:focus {
 .signup-image-link:focus {
     outline: 2px solid #007bff; /* Focus outline */
     outline-offset: 2px;
+}
+
+.main{
+    background-color: #F5F5F5;
 }

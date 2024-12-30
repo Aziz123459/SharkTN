@@ -48,4 +48,24 @@ export class ProfileComponent {
       })
     }
   }
+  
+
+  // onSubmitUpdate(): void {
+  //   const updateData Partial<User> = {
+  //     firstName: this.user.firstName,
+  //     lastName: this.user.lastName,
+  //     dateOfBirth: this.user.dateOfBirth,
+  //     phoneNumber: this.user.phoneNumber
+  //   };
+  
+  //   this.apiService.updateUser(updateData).subscribe({
+  //     next: (response) => {
+  //       console.log('User updated successfully:', response);
+  //     },
+  //     error: (err) => {
+  //       console.error('Error updating user:', err);
+  //     }
+  //   });
+  // }
+  
 }
