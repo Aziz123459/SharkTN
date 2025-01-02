@@ -22,6 +22,7 @@ export class UserFormComponent {
         const userType = res.user.acctype ; 
         localStorage.setItem("token", res.token)
         localStorage.setItem("userId", res.user._id)
+        localStorage.setItem("acctype", res.user.acctype)
         this.router.navigate(['/register', userType], {
           state: { userType: res } 
         });

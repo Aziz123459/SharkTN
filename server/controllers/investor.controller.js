@@ -83,6 +83,14 @@ const InvestorController = {
             console.error('Error fetching investors:', err);
             res.status(500).send('Server Error');
         }
+    },
+    FindInverstorByUserId2: async (req, res) => {
+        try {
+            const investor = await investorSchema.find({ userId: req.params.id }).exec();
+            return res.json(investor)
+        } catch (error) {
+            console.error('Error fetching investor:', error);
+        }    
     }
 }
 

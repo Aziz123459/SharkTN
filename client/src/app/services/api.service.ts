@@ -10,7 +10,7 @@ import { Favorite } from '../favorite';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl='http://localhost:5001/api'
+  private baseUrl='http://localhost:5000/api'
   constructor(private http:HttpClient) {}
   getFavorites(): Observable<Favorite[]> {
     return this.http.get<Favorite[]>(`${this.baseUrl}/favorites`);
@@ -49,6 +49,10 @@ export class ApiService {
 
   getuser(_id: string | undefined): Observable<any>{
     return this.http.get(`${this.baseUrl}/profile/${_id}`)
+  }
+
+  getuser2(_id: string | undefined): Observable<any>{
+    return this.http.get(`${this.baseUrl}/user/${_id}`)
   }
 
   getstartupByUserId(_id:String | undefined |null): Observable<any>{
@@ -141,7 +145,8 @@ updateStartup(data : Startup): Observable<any> {
   return this.http.patch(`${this.baseUrl}/startup/${data._id}`,data).pipe(  
     catchError(this.handleError)
   )
-}getStartupByUserId(userId: string |null|undefined): Observable<Startup> {
+}
+getStartupByUserId(userId: string |null|undefined): Observable<Startup> {
   return this.http.get<Startup>(`${this.baseUrl}/startups/${userId}`);
 }
 

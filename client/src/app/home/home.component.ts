@@ -8,6 +8,7 @@ import { Investor } from '../investor';
 import { Startup } from '../startup';
 import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 import { LoggedInFooterComponent } from '../logged-in-footer/logged-in-footer.component';
+import { User } from '../user';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent {
   item: (Investor | Startup)[] = []; 
   investorData: Investor = {};
   startupData: Startup = {};
+  user: User = {};
   allInvestors: Investor[] = [];
   allStartups: Startup[] = [];
   constructor(
@@ -80,6 +82,7 @@ export class HomeComponent {
         error: (err) => console.error('Error fetching investor:', err),
         complete: () => console.info('Fetched investor details')
       });
+      
     } else if (this.type === 'investor') {
       this.apiService.getstartup(this.startupData._id).subscribe({
         next: (startupData: Startup) => (this.startupData = startupData),

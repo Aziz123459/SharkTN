@@ -49,13 +49,13 @@ type: 'investor' | 'startup' | 'admin' |undefined;
   
   
   sendEmail(): void {
+    console.log('type:', this.type);
     const email =
-      this.type === 'investor'
+      this.type === 'startup'
         ? this.investorData.investorEmail
-        : this.startupData.startupEmail;
-        console.log('Email:', email); // Debugging
-  
-    // Open the user's default email client with only the email pre-filled
+        : this.startupData.startupEmail ;
+        console.log('Email:', email);
+        
     window.location.href = `mailto:${email}`;
   }
   

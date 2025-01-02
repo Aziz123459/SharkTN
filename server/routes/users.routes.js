@@ -35,10 +35,10 @@ router.route("/startup/:id")
     .delete(StartupController.DeleteOne)
 
 router.route("/startup/user/:id")
-    .get(StartupController.FindStartupByUserId)
+    .get(StartupController.FindStartupByUserId2)
 
 router.route("/investor/user/:id")
-    .get(InvestorController.FindInverstorByUserId)
+    .get(InvestorController.FindInverstorByUserId2)
 
 router.route("/investor")
     .get(InvestorController.ReadAll)

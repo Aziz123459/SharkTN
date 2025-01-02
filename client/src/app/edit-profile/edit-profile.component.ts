@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../services/api.service';
+import { HomeNavbarComponent } from '../home-navbar/home-navbar.component';
 import { User } from '../user';
 
 @Component({
   selector: 'app-edit-profile',
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, HomeNavbarComponent],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
 })
@@ -58,7 +59,7 @@ export class EditProfileComponent {
     })
 
     if(this.type=="startup"){
-      const data2={_id:this.dataStartup._id,startupName:this.dataStartup.startupName,teamNumber:this.dataStartup.teamNumber,BriefDescription:this.dataStartup.BriefDescription}
+      const data2={_id:this.dataStartup._id,startupName:this.dataStartup.startupName,teamNumber:this.dataStartup.teamNumber,Industry:this.dataStartup.Industry,BriefDescription:this.dataStartup.BriefDescription}
       this.apiService.updateStartup(data2).subscribe({
         next:res=>this.router.navigate([`/profile/${this.userId}`]),
 

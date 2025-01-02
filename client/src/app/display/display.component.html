@@ -3,58 +3,71 @@
 <div class="container">
   <!-- Admin Display All Users -->
   <div *ngIf="type === 'admin'" class="mt-4">
-    <h2>Admin Dashboard</h2>
-
     <!-- Display All Investors -->
-    <div *ngIf="investorData && investorData._id && type ==='admin'" class="mt-4">
-      <h3>Investor Details</h3>
-      <p><strong>Business Registration Number:</strong> {{ investorData.businessRegistrationNumber }}</p>
+    <div *ngIf="investorData && investorData._id && type ==='admin'" class="mt-4 card shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <h2 class="card-title">Investor Details</h2>
+      </div>
+      <div class="card-body  p-3 ">
       <p><strong>Investor Email:</strong> {{ investorData.investorEmail }}</p>
       <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
       <p><strong>Message:</strong> {{ investorData.message }}</p>
-      <button (click)="sendEmail()" [disabled]="!investorData.investorEmail" class="btn btn-primary btn-sm">Contact</button>
     </div>
-
+    </div>
+      
     <!-- Display All Startups -->
-    <div *ngIf="startupData && startupData._id && type==='admin'" class="mt-4">
-      <h3>Startup Details</h3>
-      <p><strong>Name:</strong> {{ startupData.startupName }}</p>
-      <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
-      <p><strong>Startup Email:</strong> {{ startupData.startupEmail }}</p>
-      <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
-      <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
-      <button (click)="sendEmail()" [disabled]="!startupData.startupEmail" class="btn btn-primary btn-sm">Contact</button>
+    <div *ngIf="startupData && startupData._id && type==='admin'" class="card shadow-sm">
+      <div class="card-header bg text-white">
+        <h2 class="card-title">Startup Details</h2>
+      </div>
+      <div class="card-body  p-3 ">
+        <div class="text-center">
+          <img src="http://localhost:5000/uploads/{{startupData.StartupLogo}}" alt="Logo" width="100px">
+        </div>
+        <p><strong>Name:</strong> {{ startupData.startupName }}</p>
+        <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
+        <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
+        <p><strong>Linkdin: </strong> <a target="_blank" href="{{ startupData.LinkedInorSocialMediaProfile }}"> {{ startupData.LinkedInorSocialMediaProfile }}</a></p>
+        <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
+      </div>
     </div>
   </div>
 
   <!-- Investor or Startup for Non-Admin -->
-  <!-- Startup Details -->
-  <div *ngIf="type === 'investor' && startupData._id" class="card shadow-sm">
-    <div class="card-header bg text-white">
-      <h2 class="card-title">Startup Details</h2>
+ <!-- Startup Details -->
+ <div *ngIf="type === 'investor' && startupData._id" class="card shadow-sm">
+  <div class="card-header bg text-white">
+    <h2 class="card-title">Startup Details</h2>
+  </div>
+  <div class="card-body">
+    <div class="text-center">
+      <img src="http://localhost:5000/uploads/{{startupData.StartupLogo}}" alt="Logo" width="100px">
     </div>
-    <div class="card-body">
-      <div class="text-center">
-        <img src="http://localhost:5000/uploads/%7B%7BstartupData.StartupLogo%7D%7D" alt="Logo" width="100px">
+    <p><strong>Name:</strong> {{ startupData.startupName }}</p>
+    <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
+    <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
+    <p><strong>Linkdin: </strong> <a target="_blank" href="{{ startupData.LinkedInorSocialMediaProfile }}"> {{ startupData.LinkedInorSocialMediaProfile }}</a></p>
+    <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
+  </div>
+  <div class="p-2 text-end">        
+    <button (click)="sendEmail()" [disabled]="!startupData.startupEmail" class="btn btn-primary btn-sm">Contact By Email</button>
+  </div>
+  
+</div>
+
+   <!-- Investor Details -->
+   <div *ngIf="type === 'startup'  && investorData._id" class="card shadow-sm mb-4">
+    <div class="card-header bg-secondary text-white">
+      <h2 class="card-title">Investor Details</h2>
+    </div>
+    <div class="card-body ">
+      <p><strong>Investor Email:</strong> {{ investorData.investorEmail }}</p>
+      <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
+      <p><strong>Message:</strong> {{ investorData.message }}</p>
+      <div class="p-2 text-end">        
+        <button (click)="sendEmail()" [disabled]="!investorData.investorEmail" class="btn btn-primary btn-sm">Contact By Email</button>
       </div>
-      <p><strong>Name:</strong> {{ startupData.startupName }}</p>
-      <p><strong>Industry:</strong> {{ startupData.Industry }}</p>
-      <p><strong>Team Number:</strong> {{ startupData.teamNumber }}</p>
-      <p><strong>Description:</strong> {{ startupData.BriefDescription }}</p>
     </div>
-    <button (click)="sendEmail()" [disabled]="!startupData.startupEmail" class="btn btn-primary btn-sm">Contact</button>
   </div>
-
-  <div *ngIf="type === 'startup' && investorData._id" class="mt-4">
-    <h2>Investor Details</h2>
-    <p><strong>Business Registration Number:</strong> {{ investorData.businessRegistrationNumber }}</p>
-    <p><strong>Investor Email:</strong> {{ investorData.investorEmail }}</p>
-    <p><strong>Investment Amount:</strong> {{ investorData.investmentAmount }}</p>
-    <p><strong>Message:</strong> {{ investorData.message }}</p>
-    <button (click)="sendEmail()" [disabled]="!investorData.investorEmail" class="btn btn-primary btn-sm">Contact</button>
-  </div>
-
-  <!-- Loading or Error Handling -->
-  <p *ngIf="!investorData._id && !startupData._id ">Loading details...</p>
 </div>
 </div>

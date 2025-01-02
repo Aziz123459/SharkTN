@@ -93,6 +93,14 @@ const StartupController = {
             console.error('Error fetching startups:', err);
             res.status(500).send('Server Error');
         }
+    },
+    FindStartupByUserId2: async (req, res) => {        
+        try {
+            const startup = await StartUpSchema.find({ userId: req.params.id }).exec();
+            return res.json(startup)
+        } catch (error) {
+            console.error('Error fetching startup:', error);
+        }    
     }
 }
 

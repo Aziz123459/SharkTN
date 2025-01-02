@@ -47,7 +47,7 @@ const UserSchema = new Schema({
       enum: ['investor','startup', 'admin'],
       required:[true,"Account Type is required"],
       validate:{
-          validator:(t) => ["investor","startup"].includes(t),
+          validator:(t) => ["investor","startup","admin"].includes(t),
           message:(props) => props.value+" is not a valid Account type"
       }
   },
