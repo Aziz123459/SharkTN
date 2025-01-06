@@ -10,7 +10,7 @@ import { Favorite } from '../favorite';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl='http://localhost:5000/api'
+  private baseUrl='http://localhost:5001/api'
   constructor(private http:HttpClient) {}
   getFavorites(): Observable<Favorite[]> {
     return this.http.get<Favorite[]>(`${this.baseUrl}/favorites`);

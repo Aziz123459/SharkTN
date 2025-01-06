@@ -1,22 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Startup } from '../startup';
 import { Investor } from '../investor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ApiService } from '../services/api.service';
-
-
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-choice-form',
-  imports: [CommonModule,FormsModule, MatCardModule, MatFormFieldModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './choice-form.component.html',
-  styleUrl: './choice-form.component.css'
+  styleUrls: ['./choice-form.component.css'],
 })
-export class ChoiceFormComponent {
+export class ChoiceFormComponent implements OnInit {
   type: 'investor' | 'startup' | null = null;
   investorData: Investor = {};
   startupData: Startup = {};
@@ -24,37 +34,66 @@ export class ChoiceFormComponent {
   userId: string | null = null;
   selectedFile: File[] = [];
 
-constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService) {}
+  // Add FormGroups for stepper
+  investorFormGroup!: FormGroup;
+  startupFormGroup!: FormGroup;
 
-ngOnInit(): void {
-  this.type = this.route.snapshot.paramMap.get('type') as 'investor' | 'startup';
-  this.userId= localStorage.getItem('userId');
-}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService,
+    private fb: FormBuilder // FormBuilder for FormGroup initialization
+  ) {}
 
-submitInvestor(): void {
-  if (this.investorData) {
-    this.investorData.userId=this.userId
-    this.apiService.creatInvestor(this.investorData).subscribe({
-      next: (response) => {
-        console.log('Investor created successfully:', response);
-        this.router.navigate(['/home',this.type]);
-        
-      },
-      error: (err) => {
-        console.error('Error creating investor:', err);
-        this.errorMessage = 'Failed to create investor. Please try again.';
-      }
+  ngOnInit(): void {
+    this.type = this.route.snapshot.paramMap.get('type') as 'investor' | 'startup';
+    this.userId = localStorage.getItem('userId');
+
+    // Initialize FormGroups
+    this.investorFormGroup = this.fb.group({
+      businessRegistrationNumber: ['', Validators.required],
+      investorEmail: ['', [Validators.required, Validators.email]],
+      investmentAmount: ['', [Validators.required, Validators.min(1)]],
+      message: ['', Validators.maxLength(500)],
+    });
+
+    this.startupFormGroup = this.fb.group({
+      startupName: ['', Validators.required],
+      startupEmail: ['', [Validators.required, Validators.email]],
+      teamNumber: ['', Validators.required],
+      briefDescription: ['', Validators.maxLength(500)],
     });
   }
-}
-onFileSelected(event: any,idx : number): void {
-  this.selectedFile[idx] = event.target.files[0];
-}
 
-submitStartup(): void {
-    if (this.startupData){
-      this.startupData = {...this.startupData,StartupLogo:this.selectedFile[0].name,UploadGovernmentIssuedID:this.selectedFile[1].name,UploadBusinessRegistrationCertificate:this.selectedFile[2].name}
-      this.startupData.userId=this.userId
+  submitInvestor(): void {
+    if (this.investorData) {
+      this.investorData.userId = this.userId;
+      this.apiService.creatInvestor(this.investorData).subscribe({
+        next: (response) => {
+          console.log('Investor created successfully:', response);
+          this.router.navigate(['/home', this.type]);
+        },
+        error: (err) => {
+          console.error('Error creating investor:', err);
+          this.errorMessage = 'Failed to create investor. Please try again.';
+        },
+      });
+    }
+  }
+
+  onFileSelected(event: any, idx: number): void {
+    this.selectedFile[idx] = event.target.files[0];
+  }
+
+  submitStartup(): void {
+    if (this.startupData) {
+      this.startupData = {
+        ...this.startupData,
+        StartupLogo: this.selectedFile[0].name,
+        UploadGovernmentIssuedID: this.selectedFile[1].name,
+        UploadBusinessRegistrationCertificate: this.selectedFile[2].name,
+      };
+      this.startupData.userId = this.userId;
       this.apiService.creatStartup(this.startupData).subscribe({
         next: (response) => {
           if (this.selectedFile.length > 0) {
@@ -65,17 +104,14 @@ submitStartup(): void {
               });
             });
           }
-          console.log("posted")
           console.log('Startup created successfully:', response);
-          
-          this.router.navigate(['/home',this.type]);
+          this.router.navigate(['/home', this.type]);
         },
         error: (err) => {
           console.error('Error creating startup:', err);
           this.errorMessage = 'Failed to create startup. Please try again.';
-        }
+        },
       });
     }
-}
-
+  }
 }
